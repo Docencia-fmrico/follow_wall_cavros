@@ -14,7 +14,7 @@
 
 #include "follow-wall-cavros/LifeCycle.hpp"
 
-LyfeCicle::LifeCycle() 
+LifeCycle::LifeCycle() 
 : LifecycleNode("lifecycle_node_example")
 {
 

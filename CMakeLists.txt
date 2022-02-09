@@ -15,21 +15,22 @@ set(dependencies
     std_msgs
 )
 
+include_directories(include)
+
+add_library(${PROJECT_NAME} SHARED src/follow-wall-cavros/LifeCycle.cpp)
+ament_target_dependencies(${PROJECT_NAME} ${dependencies})
+
 add_executable(follow_line_main src/follow_line_main.cpp)
 ament_target_dependencies(follow_line_main ${dependencies})
 
-
+target_link_libraries(follow_line_main ${PROJECT_NAME})
 
 install(TARGETS
   follow_line_main
-  LifeCycle
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
-#install(DIRECTORY launch DESTINATION share/${PROJECT_NAME})
-
 ament_export_dependencies(${dependencies})
-
 ament_package()

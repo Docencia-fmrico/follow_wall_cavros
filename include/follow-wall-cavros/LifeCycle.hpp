@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
+#define FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
+
 #include <memory>
 #include "lifecycle_msgs/msg/state.hpp"
 #include "rclcpp/rclcpp.hpp"
@@ -37,3 +40,5 @@ public:
   void do_work();
 private:
 };
+
+#endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
