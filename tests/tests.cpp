@@ -19,56 +19,17 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-#include "follow_wall/LaserNode.hpp"
+#include "follow_wall-cavros/LaserNode.hpp"
 
-TEST(test_node, test_get_msg)
+TEST(test_node, velocity)
 {
 }
 
-TEST(test_node, subscription)
+TEST(test_node, distance)
 {
-  auto node = std::make_shared<test_ci::TestNode>();
-
-  auto test_node = rclcpp::Node::make_shared("test_node");
-  auto test_pub = test_node->create_publisher<std_msgs::msg::String>(
-    "/message", 10);
-
-
-  rclcpp::executors::SingleThreadedExecutor exe;
-  exe.add_node(node);
-  exe.add_node(test_node);
-
-  bool finish = false;
-  std::thread t([&]() {
-      while (!finish) {exe.spin_some();}
-    });
+  auto node = std::make_shared<follow_wall-cavros::LaserNode>();
 
   ASSERT_EQ("", node->get_last_msg());
-
-  {
-    rclcpp::Rate rate(10);
-    auto start = test_node->now();
-    while ((test_node->now() - start).seconds() < 0.5) {
-      rate.sleep();
-    }
-  }
-
-  std_msgs::msg::String msg;
-  msg.data = "hello";
-  test_pub->publish(msg);
-
-  {
-    rclcpp::Rate rate(10);
-    auto start = test_node->now();
-    while ((test_node->now() - start).seconds() < 0.5) {
-      rate.sleep();
-    }
-  }
-
-  ASSERT_EQ("hello", node->get_last_msg());
-
-  finish = true;
-  t.join();
 }
 
 
