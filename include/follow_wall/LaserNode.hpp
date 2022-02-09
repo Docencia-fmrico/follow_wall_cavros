@@ -21,9 +21,9 @@ public:
   LaserNode(const std::string & name, const std::chrono::nanoseconds & rate)
   : Node(name)
   {
-    pub_ = create_publisher<geometry_msgs::msg::Twist>("velocities", 10);
+    pub_ = create_publisher<geometry_msgs::msg::Twist>("/key_vel", 10);
     sub_ = create_subscription<sensor_msgs::msg::LaserScan>(
-      "/LaserScan", 10, std::bind(&LaserNode::callback, this, _1));
+      "/scan_raw", 10, std::bind(&LaserNode::callback, this, _1));
   }
 
 private:
