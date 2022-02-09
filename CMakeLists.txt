@@ -7,9 +7,11 @@ set(CMAKE_BUILD_TYPE DEBUG)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 
 set(dependencies
     rclcpp
+    rclcpp_lifecycle
     std_msgs
 )
 
@@ -20,6 +22,7 @@ ament_target_dependencies(follow_line_main ${dependencies})
 
 install(TARGETS
   follow_line_main
+  LifeCycle
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
