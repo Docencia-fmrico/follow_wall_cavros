@@ -12,25 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+//#ifndef FOLLOW_WALL_CAVROS__LASERNODE_HPP_
+//#define FOLLOW_WALL_CAVROS__LASERNODE_HPP_
+
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
+#include "geometry_msgs/msg/twist.hpp"
+#include "geometry_msgs/msg/vector3.hpp"
+#include "sensor_msgs/msg/laser_scan.hpp"
 
-class LaserNode : public rclcpp::Node
-{
-public:
-  LaserNode(const std::string & name, const std::chrono::nanoseconds & rate)
-  : Node(name)
+using std::placeholders::_1;
+using namespace std::chrono_literals;//500ms...
+
+namespace LaserNode{
+
+
+  class LaserNode : public rclcpp::Node
   {
-    pub_ = create_publisher<geometry_msgs::msg::Twist>("/key_vel", 10);
-    sub_ = create_subscription<sensor_msgs::msg::LaserScan>(
-      "/scan_raw", 10, std::bind(&LaserNode::callback, this, _1));
-  }
+  public:
+    LaserNode(const std::string & name)
+    : Node(name)
+    {
+      vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
+      laser_sub_ = create_subscription<sensor_msgs::msg::LaserScan>(
+        "/scan_raw", 10, std::bind(&LaserNode::Laser_callback, this, _1));
+    }
 
-private:
+    void pub_vel(void);
+    int main( int argc , char* argv[]);
 
-  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr pub_; // publicador de velocidades
-  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_; // subscriptor del laser
+  private:
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_; // subscriptor del laser
 
-  void callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const;
-  void publishVel(void);
-};
+    void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const;
+    
+  };
+
+} //namespace LaserNode

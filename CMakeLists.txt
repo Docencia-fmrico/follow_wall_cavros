@@ -9,15 +9,21 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 set(dependencies
     rclcpp
     rclcpp_lifecycle
     std_msgs
     geometry_msgs
+    sensor_msgs
 )
 
 include_directories(include)
+
+install(DIRECTORY include/
+  DESTINATION include/
+)
 
 add_library(${PROJECT_NAME} SHARED src/follow-wall-cavros/LifeCycle.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
