@@ -12,22 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "rclcpp/rclcpp.hpp"
-#include "geometry_msgs/msg/twist.hpp"
-#include "geometry_msgs/msg/vector3.hpp"
+#include "follow-wall-cavros/LaserNode.hpp"
+
 using namespace std::chrono_literals;//500ms...
 
+namespace LaserNode{
 
-class MyNodePublisher : public rclcpp::Node
-{
-public:
-  MyNodePublisher()
-  : Node("componsable_node_pub")
-  {
-    vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
-  }
-
-  void pub_vel()
+  void LaserNode::pub_vel(void)
   {
     geometry_msgs::msg::Vector3 vel;
     geometry_msgs::msg::Twist msg_vel;
@@ -41,27 +32,49 @@ public:
     vel_pub_->publish(msg_vel);
   }
 
-private:
-  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_;//_ por convención de estilo
-};
+  void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const{
+    //Laser Range of distances : min = 0.05m ; max = 25m 
+    //los datos en msg->ranges van de derecha a izquierda
+    //hay 665 valores
 
+    float min = 25;
+    int pos, angle ;
+
+    for(int i=0 ; i < 666 ; i++){
+      if(msg->ranges[i] < min){
+        min = msg->ranges[i];
+        pos = i;
+      }
+    }
+    
+    //angle range follows:
+    //            ^ 90º
+    //            | 
+    // 180º <--  robot  --> 0º ( minimum angle = -18º ; and maximum = 198º)
+
+    angle = ( pos - 54 ) / 3;
+    RCLCPP_INFO(this->get_logger(),"min distance:%f at angle= %d\n",min,angle);
+
+  }
+
+}//namespace LaserNode
 
 int main(int argc, char * argv[])
-{
-  rclcpp::init(argc, argv);
+  {
+    rclcpp::init(argc, argv);
 
-  auto node = std::make_shared<MyNodePublisher>();
+    auto node = std::make_shared<LaserNode::LaserNode>("Laser_Node");
 
-  rclcpp::Rate loop_rate(500ms);
-  while (rclcpp::ok()) {
-    node->pub_vel();
+    rclcpp::Rate loop_rate(500ms);
+    while (rclcpp::ok()) {
+      node->pub_vel();
 
-    rclcpp::spin_some(node);
-    loop_rate.sleep();
+      rclcpp::spin_some(node);
+      loop_rate.sleep();
+    }
+
+    rclcpp::shutdown();
+
+    return 0;
   }
   
-  rclcpp::shutdown();
-
-  return 0;
-}
-
