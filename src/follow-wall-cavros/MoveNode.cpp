@@ -12,21 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "rclcpp/rclcpp.hpp"
+#include "follow-wall-cavros/MoveNode.hpp"
 
-int main(int argc, char * argv[])
-{
-  rclcpp::init(argc, argv);
+using namespace std::chrono_literals;//500ms...
 
-  // trigger_transition para transicionar en el lifecycle.
-  // executors + lifecycles = node->get_node_base_interface()
+namespace MoveNode{
 
-  //auto --- legibilidad del codigo aumenta si es evidente lo que hay a la derecha
-  auto node = rclcpp::Node::make_shared("simple_node");//constructor del nodo y le pasas su nombre
+  void MoveNode::pub_vel(void)
+  {
+    geometry_msgs::msg::Vector3 vel;
+    geometry_msgs::msg::Twist msg_vel;
 
-  rclcpp::spin(node);//te quedas bloqueado gestionando cualquier evento que pueda ocurrir(si le llegan msgs, manejar timers...)
+    vel.x = -3.0;
+    vel.y = 0.0;
+    vel.z = 0.0;
 
-  rclcpp::shutdown();
+    msg_vel.linear = vel;
 
-  return 0;
-}
+    vel_pub_->publish(msg_vel);
+  }
+
+}//namespace MoveNode

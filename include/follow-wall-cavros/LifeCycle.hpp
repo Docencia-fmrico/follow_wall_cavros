@@ -33,12 +33,14 @@ public:
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
+  // Opcionales
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
   
   void do_work();
 private:
+  // Declarar un timer?
 };
 
 #endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
