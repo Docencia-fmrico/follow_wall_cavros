@@ -31,9 +31,7 @@ namespace MoveNode{
     {
       vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
     }
-
     void pub_vel(void);
-    int main( int argc , char* argv[]);
 
   private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades  
