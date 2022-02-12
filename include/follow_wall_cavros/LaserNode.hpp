@@ -17,6 +17,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
+#include "std_msgs/msg/float32_multi_array.hpp"
 
 
 using std::placeholders::_1;
@@ -31,5 +32,6 @@ namespace follow_wall_cavros{
 
   private:
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
+    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
   };
 }
