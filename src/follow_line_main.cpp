@@ -35,6 +35,7 @@ int main(int argc, char * argv[])
       pub_node->pub_vel();
 
       rclcpp::spin_some(pub_node);
+      rclcpp::spin_some(sub_node);
       loop_rate.sleep();
     }
 
