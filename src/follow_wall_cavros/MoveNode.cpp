@@ -12,14 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "follow-wall-cavros/MoveNode.hpp"
+#include "follow_wall_cavros/MoveNode.hpp"
 
 using namespace std::chrono_literals;//500ms...
 
-namespace MoveNode{
+namespace follow_wall_cavros{
+  MoveNode::MoveNode(const std::string & name)
+    : Node(name)
+    {
+      vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
+    }
 
   void MoveNode::pub_vel(void)
   {
+
     geometry_msgs::msg::Vector3 vel;
     geometry_msgs::msg::Twist msg_vel;
 
@@ -31,5 +37,5 @@ namespace MoveNode{
 
     vel_pub_->publish(msg_vel);
   }
+}
 
-}//namespace MoveNode

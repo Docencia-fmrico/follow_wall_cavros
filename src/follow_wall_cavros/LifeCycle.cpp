@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "follow-wall-cavros/LifeCycle.hpp"
+#include "follow_wall_cavros/LifeCycle.hpp"
 
 LifeCycle::LifeCycle() 
 : LifecycleNode("lifecycle_node_example")

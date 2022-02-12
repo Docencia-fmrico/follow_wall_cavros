@@ -16,25 +16,20 @@
 //#define FOLLOW_WALL_CAVROS__MOVENODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
-#include "geometry_msgs/msg/twist.hpp"
-#include "geometry_msgs/msg/vector3.hpp"
+#include "sensor_msgs/msg/laser_scan.hpp"
+
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;//500ms...
 
-namespace MoveNode{
-  class MoveNode : public rclcpp::Node
+namespace follow_wall_cavros{
+  class LaserNode : public rclcpp::Node
   {
   public:
-    MoveNode(const std::string & name)
-    : Node(name)
-    {
-      vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
-    }
-    void pub_vel(void);
+    LaserNode(const std::string & name);
+    void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)/*const*/;
 
   private:
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades  
+    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   };
-
-} //namespace MoveNode
+}

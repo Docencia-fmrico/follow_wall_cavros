@@ -12,7 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "rclcpp/rclcpp.hpp"
+//#include "rclcpp/rclcpp.hpp"
+
+#include "follow_wall_cavros/MoveNode.hpp"
+#include "follow_wall_cavros/LaserNode.hpp"
+
 
 int main(int argc, char * argv[])
 {
@@ -22,11 +26,19 @@ int main(int argc, char * argv[])
   // executors + lifecycles = node->get_node_base_interface()
 
   //auto --- legibilidad del codigo aumenta si es evidente lo que hay a la derecha
-  auto node = rclcpp::Node::make_shared("simple_node");//constructor del nodo y le pasas su nombre
+  //auto node = rclcpp::Node::make_shared("simple_node");//constructor del nodo y le pasas su nombre
+  auto pub_node = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
+  auto sub_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 
-  rclcpp::spin(node);//te quedas bloqueado gestionando cualquier evento que pueda ocurrir(si le llegan msgs, manejar timers...)
+  rclcpp::Rate loop_rate(500ms);
+    while (rclcpp::ok()) {
+      pub_node->pub_vel();
 
-  rclcpp::shutdown();
+      rclcpp::spin_some(pub_node);
+      loop_rate.sleep();
+    }
+
+    rclcpp::shutdown();
 
   return 0;
 }

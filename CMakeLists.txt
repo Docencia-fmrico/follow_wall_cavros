@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(follow-wall-cavros)
+project(follow_wall_cavros)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_BUILD_TYPE DEBUG)
@@ -22,8 +22,9 @@ set(dependencies
 include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED 
-  src/follow-wall-cavros/LifeCycle.cpp
-  src/follow-wall-cavros/MoveNode.cpp  
+  src/follow_wall_cavros/LifeCycle.cpp
+  src/follow_wall_cavros/MoveNode.cpp  
+  src/follow_wall_cavros/LaserNode.cpp
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
