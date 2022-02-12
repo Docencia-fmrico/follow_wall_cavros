@@ -21,28 +21,30 @@ set(dependencies
 
 include_directories(include)
 
-install(DIRECTORY include/
-  DESTINATION include/
+add_library(${PROJECT_NAME} SHARED 
+  src/follow-wall-cavros/LifeCycle.cpp
+  src/follow-wall-cavros/MoveNode.cpp  
 )
-
-add_library(${PROJECT_NAME} SHARED src/follow-wall-cavros/LifeCycle.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
-
-add_executable(LaserNode src/follow-wall-cavros/LaserNode.cpp)
-ament_target_dependencies(LaserNode ${dependencies})
 
 add_executable(follow_line_main src/follow_line_main.cpp)
 ament_target_dependencies(follow_line_main ${dependencies})
 
 target_link_libraries(follow_line_main ${PROJECT_NAME})
 
+install(DIRECTORY include/
+  DESTINATION include/
+)
+
 install(TARGETS
   follow_line_main
-  LaserNode
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
+ament_export_include_directories(include)
+ament_export_libraries(${PROJECT_NAME})
 ament_export_dependencies(${dependencies})
+
 ament_package()

@@ -17,27 +17,31 @@
 LifeCycle::LifeCycle() 
 : LifecycleNode("lifecycle_node_example")
 {
-
+    // Para declarar parámetros p.ej
 }
 
+// -- TRANSICIONES -- 
 using CallbackReturnT =
     rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT 
 LifeCycle::on_configure(const rclcpp_lifecycle::State & state)
 {
-    return CallbackReturnT::SUCCESS;
+    // Se establecen los parametros
+    return CallbackReturnT::SUCCESS; //FAILURE
 }
 
 CallbackReturnT 
 LifeCycle::on_activate(const rclcpp_lifecycle::State & state)
 {
+    // Crear timer + activar publicador (velocidades)
     return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT 
 LifeCycle::on_deactivate(const rclcpp_lifecycle::State & state)
 {
+    // Destruir timer + desactivar publicador 
     return CallbackReturnT::SUCCESS;
 }
 
