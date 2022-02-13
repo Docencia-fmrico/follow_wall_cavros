@@ -33,7 +33,7 @@ namespace follow_wall_cavros{
 
     angle = ( pos - 324 ) / 3;
 
-    info.data.push_back(min);
+    info.data.push_back(msg->ranges[333]);
     info.data.push_back(angle);
 
     laser_info_pub_->publish(info);

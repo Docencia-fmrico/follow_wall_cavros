@@ -27,44 +27,76 @@ namespace follow_wall_cavros{
 
   void MoveNode::pub_vel(void)
   {
-    geometry_msgs::msg::Vector3 vel;
+    geometry_msgs::msg::Vector3 vel_linear,vel_angular;
     geometry_msgs::msg::Twist msg_vel;
+  
+    vel_linear.x = x_;
+    vel_angular.z = z_;
 
-    vel.x = x_;
-    vel.y = y_;
-    vel.z = z_;
-
-    msg_vel.linear = vel;
+    msg_vel.linear = vel_linear;
+    msg_vel.angular = vel_angular;
 
     vel_pub_->publish(msg_vel);
+
   }
 
-  //void MoveNode::follow_wall(){}
+  void MoveNode::follow_wall(){
+   
+
+  }
 
   void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
     
     float min_distance = msg->data[0], angle = msg->data[1];
-    bool parallel = false;
+    bool parallel = false,turning = false;
 
-    if( (angle <= 100 && angle >= 80) || ( angle <= -80 && angle >= -100 )){
+    if( (angle >= 80 && angle <= 100) || ( angle >= -100 && angle <= -80 )){
       parallel = true;
     }
     RCLCPP_INFO(this->get_logger(),"dist: %f ; angle : %f ; parallel?= %d\n",min_distance,angle,parallel);
 
+    if(min_distance > 0.9){
+      x_ = 0.3;
+      z_ = 0.0;
+    }
+    else if(angle > -15 && angle < 15){
+      x_ = 0;
+      z_ = 0;
+      follow_wall();
+    }
+    else{
+      if(min_distance < 0.9 && angle < 0.0){
+        x_ = 0.0;
+        z_ = -0.2;
+      }
+      else if(min_distance < 0.9 && angle > 0.0){
+        x_ = 0.0;
+        z_ = 0.2;
+      }
+    }
+    
+    
+    
+
+/*
     if(min_distance < 1 && parallel){
       //MoveNode::follow_wall();
     }else{
       if(angle > -10 && angle < 10){
+        RCLCPP_INFO(this->get_logger(),"RECTOOOOO");
         x_ = 0.5;
+        z_ = 0.0;
       }else{
         x_ = 0.0;
-        if(angle < 0){
-          z_ = 1.0;
+        if(angle < 0.0){
+          RCLCPP_INFO(this->get_logger(),"Girando izquierda");
+          z_ = 0.2;
         }else{
-          z_ = -1.0;
+          RCLCPP_INFO(this->get_logger(),"Girando derecha");
+          z_ = 0.2;
         }
       }
-    } 
+    } */
   }
 
 }// namespace 
