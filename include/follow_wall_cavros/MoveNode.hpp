@@ -18,6 +18,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 #include "geometry_msgs/msg/vector3.hpp"
+#include "std_msgs/msg/float32_multi_array.hpp"
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;//500ms...
@@ -28,9 +29,16 @@ namespace follow_wall_cavros{
   public:
     MoveNode(const std::string & name);
     void pub_vel(void);
+    void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
+    //void follow_wall();
 
   private:
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades  
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades 
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr dist_sub_; // subscriptor a los datos relevantes del laser 
+
+    float x_;
+    float y_;
+    float z_;
   };
 }
 

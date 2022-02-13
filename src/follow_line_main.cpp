@@ -31,11 +31,7 @@ int main(int argc, char * argv[])
   auto sub_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 
   rclcpp::Rate loop_rate(500ms);
-  //rclcpp::spin(pub_node);
-  //rclcpp::executors::SingleThreadedExecutor executor;
-  //executor.add_node(pub_node);
-  //executor.add_node(sub_node);
-  //executor.spin();
+
   while (rclcpp::ok()) {
     pub_node->pub_vel();
     rclcpp::spin_some(pub_node);

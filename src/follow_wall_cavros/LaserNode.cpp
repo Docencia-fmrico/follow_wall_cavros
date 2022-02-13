@@ -31,14 +31,10 @@ namespace follow_wall_cavros{
     //            | 
     // 90º <--  robot  --> -90º ( first angle = -108º ; and last = 108º)
 
-    angle = ( pos - 54 ) / 3;
-    RCLCPP_INFO(this->get_logger(),"Data laser= %f\n",msg->ranges[333]);
+    angle = ( pos - 324 ) / 3;
 
     info.data.push_back(min);
     info.data.push_back(angle);
-    RCLCPP_INFO(this->get_logger(),"min distance:%f \n",info.data[0]);
-    RCLCPP_INFO(this->get_logger(),"angle:%f \n",info.data[1]);
-
 
     laser_info_pub_->publish(info);
 
