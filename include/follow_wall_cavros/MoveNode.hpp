@@ -30,7 +30,6 @@ namespace follow_wall_cavros{
     MoveNode(const std::string & name);
     void pub_vel(void);
     void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
-    void follow_wall();
 
   private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades 

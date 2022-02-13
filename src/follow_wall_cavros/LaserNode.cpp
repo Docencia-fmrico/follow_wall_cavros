@@ -16,25 +16,36 @@ namespace follow_wall_cavros{
     //los datos en msg->ranges van de derecha a izquierda
     //hay 665 valores
 
-    float min = 25, angle;
+    float min = 25, angle ,sudden_change_angles[4] = {0,0,0,0};
     std_msgs::msg::Float32MultiArray info;
-    int pos;
+    int pos,j = 0;
+
+    //angle range follows:
+    //            ^ 0º
+    //            | 
+    // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last = 108º) [ angle*3.005 = pos ]
 
     for(int i=0 ; i < 666 ; i++){
+      //min distance
       if(msg->ranges[i] < min){
         min = msg->ranges[i];
         pos = i;
       }
+
     }
-    //angle range follows:
-    //            ^ 0º
-    //            | 
-    // 90º <--  robot  --> -90º ( first angle = -108º ; and last = 108º)
 
-    angle = ( pos - 324 ) / 3;
+    angle = ( pos - 329.94 ) / 3.055;
 
-    info.data.push_back(msg->ranges[333]);
     info.data.push_back(angle);
+    info.data.push_back(min);
+    info.data.push_back(msg->ranges[131]);
+  /*
+    for ( int i = 0; i< 4; i++){
+      if(sudden_change_angles[i] != 0){
+        info.data.push_back(sudden_change_angles[i]);
+      }
+    }
+    */
 
     laser_info_pub_->publish(info);
 

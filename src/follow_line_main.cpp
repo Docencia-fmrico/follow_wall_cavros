@@ -26,11 +26,11 @@ int main(int argc, char * argv[])
   // executors + lifecycles = node->get_node_base_interface()
 
   //auto --- legibilidad del codigo aumenta si es evidente lo que hay a la derecha
-  //auto node = rclcpp::Node::make_shared("simple_node");//constructor del nodo y le pasas su nombre
+  //auto node = rclcpp::Node::make_shared("simple_node"); //constructor del nodo y le pasas su nombre
   auto pub_node = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
   auto sub_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 
-  rclcpp::Rate loop_rate(500ms);
+  rclcpp::Rate loop_rate(300ms);
 
   while (rclcpp::ok()) {
     pub_node->pub_vel();

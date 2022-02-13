@@ -40,46 +40,70 @@ namespace follow_wall_cavros{
 
   }
 
-  void MoveNode::follow_wall(){
-   
-
-  }
-
   void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg) {
     
-    float min_distance = msg->data[0], angle = msg->data[1];
-    bool parallel = false,turning = false;
+    float angle = msg->data[0] , min_distance = msg->data[1], right_distance = msg->data[2];
+    bool parallel = false;
 
-    if( (angle >= 80 && angle <= 100) || ( angle >= -100 && angle <= -80 )){
-      parallel = true;
-    }
-    RCLCPP_INFO(this->get_logger(),"dist: %f ; angle : %f ; parallel?= %d\n",min_distance,angle,parallel);
+    RCLCPP_INFO(this->get_logger(),"dist: %f ; angle : %f , right _dist: %f\n",min_distance,angle,right_distance);
 
-    if(min_distance > 0.9){
-      x_ = 0.3;
-      z_ = 0.0;
-    }
-    else if(angle > -15 && angle < 15){
-      x_ = 0;
-      z_ = 0;
-      follow_wall();
-    }
-    else{
-      if(min_distance < 0.9 && angle < 0.0){
-        x_ = 0.0;
+    //aproach to wall
+    if(min_distance > 0.7){
+      if(angle > 10 ){
+        z_ = 0.2;
+
+        if(angle < 20){
+          x_ = 0.2;
+        }else{
+          x_ = 0.0;
+        }
+      }else if(angle < -10){
+        z_ = -0.2;
+
+        if(angle > -20){
+          x_ = 0.2;
+        }else{
+          x_ = 0.0;
+        }
+      
+      }else{
+        z_ = 0.0;
+        x_ = 0.5;
+      }
+      RCLCPP_INFO(this->get_logger(),"APROACHING\n");
+
+    }else { // already close to wall
+      
+      //lineal
+      if(angle > -105 && angle < -75 && min_distance > 0.3){
+        x_ = 0.3;
+      }else{
+        x_ = 0;
+      }
+
+      //angular
+      if(angle < -90 ){
         z_ = -0.2;
       }
-      else if(min_distance < 0.9 && angle > 0.0){
-        x_ = 0.0;
+      else if(angle > -90 ){
         z_ = 0.2;
+      }else{
+        z_ = 0.0;
       }
+
+      if(right_distance > 2.5){
+        z_ = -0.3;
+        x_ = 0.3;
+      }
+
+      RCLCPP_INFO(this->get_logger(),"CLOSE\n");
     }
     
     
     
 
 /*
-    if(min_distance < 1 && parallel){
+    if(front_distance < 1 && parallel){
       //MoveNode::follow_wall();
     }else{
       if(angle > -10 && angle < 10){
