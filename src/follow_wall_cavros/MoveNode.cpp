@@ -29,7 +29,7 @@ namespace follow_wall_cavros{
     geometry_msgs::msg::Vector3 vel;
     geometry_msgs::msg::Twist msg_vel;
 
-    vel.x = -3.0;
+    vel.x = 0.0;
     vel.y = 0.0;
     vel.z = 0.0;
 

@@ -11,14 +11,14 @@ namespace follow_wall_cavros{
         laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
     }
 
-  void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) /*const*/{
+  void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const{
     //Laser Range of distances : min = 0.05m ; max = 25m 
     //los datos en msg->ranges van de derecha a izquierda
     //hay 665 valores
 
     float min = 25, angle;
     std_msgs::msg::Float32MultiArray info;
-    int pos ;
+    int pos;
 
     for(int i=0 ; i < 666 ; i++){
       if(msg->ranges[i] < min){
@@ -31,11 +31,15 @@ namespace follow_wall_cavros{
     //            | 
     // 90º <--  robot  --> -90º ( first angle = -108º ; and last = 108º)
 
-    angle = ( pos - 144 ) / 3;
-    RCLCPP_INFO(this->get_logger(),"min distance:%f at angle= %d\n",min,angle);
+    angle = ( pos - 54 ) / 3;
+    RCLCPP_INFO(this->get_logger(),"Data laser= %f\n",msg->ranges[333]);
 
-    info.data[0] = min;
-    info.data[1] = angle;
+    info.data.push_back(min);
+    info.data.push_back(angle);
+    RCLCPP_INFO(this->get_logger(),"min distance:%f \n",info.data[0]);
+    RCLCPP_INFO(this->get_logger(),"angle:%f \n",info.data[1]);
+
+
     laser_info_pub_->publish(info);
 
   }

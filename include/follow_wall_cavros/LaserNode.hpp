@@ -28,7 +28,7 @@ namespace follow_wall_cavros{
   {
   public:
     LaserNode(const std::string & name);
-    void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)/*const*/;
+    void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)const;
 
   private:
     rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
