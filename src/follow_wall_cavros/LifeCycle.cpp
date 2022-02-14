@@ -17,7 +17,8 @@
 LifeCycle::LifeCycle() 
 : LifecycleNode("LifeCycle")
 {
-    // Para declarar parámetros p.ej
+    pub_node_ = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
+    sub_node_ = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 }
 
 // -- TRANSICIONES -- 
@@ -53,4 +54,7 @@ LifeCycle::do_work()
     }
 
     RCLCPP_INFO(get_logger(), "[%s] Ejecutando do_work...", get_name());
+    pub_node_->pub_vel();
+    rclcpp::spin_some(pub_node_);
+    rclcpp::spin_some(sub_node_);
 }

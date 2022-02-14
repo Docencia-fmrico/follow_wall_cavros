@@ -14,8 +14,6 @@
 
 //#include "rclcpp/rclcpp.hpp"
 
-#include "follow_wall_cavros/MoveNode.hpp"
-#include "follow_wall_cavros/LaserNode.hpp"
 #include "follow_wall_cavros/LifeCycle.hpp"
 
 

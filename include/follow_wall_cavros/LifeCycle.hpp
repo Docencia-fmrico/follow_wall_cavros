@@ -19,6 +19,8 @@
 #include "lifecycle_msgs/msg/state.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "follow_wall_cavros/MoveNode.hpp"
+#include "follow_wall_cavros/LaserNode.hpp"
 
 using rcl_interfaces::msg::ParameterType;
 using std::placeholders::_1;
@@ -36,7 +38,8 @@ public:
   
   void do_work();
 private:
-  // Declarar un timer?
+  std::shared_ptr<follow_wall_cavros::MoveNode> pub_node_;
+  std::shared_ptr<follow_wall_cavros::LaserNode> sub_node_;
 };
 
 #endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
