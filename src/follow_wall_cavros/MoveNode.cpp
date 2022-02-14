@@ -68,24 +68,25 @@ namespace follow_wall_cavros{
       
       }else{
         z_ = 0.0;
-        x_ = 0.5;
+        x_ = 0.35;
       }
       RCLCPP_INFO(this->get_logger(),"APROACHING\n");
 
     }else { // already close to wall
       
       //lineal
-      if(angle > -105 && angle < -75 && min_distance > 0.3){
+      if(angle > -105 && angle < -75){
         x_ = 0.3;
+      }else if(min_distance < 0.3){
+        x_ = -0.1;
       }else{
         x_ = 0;
       }
 
       //angular
-      if(angle < -90 ){
+      if(angle < -95 ){
         z_ = -0.2;
-      }
-      else if(angle > -90 ){
+      }else if(angle > -85 ){
         z_ = 0.2;
       }else{
         z_ = 0.0;
@@ -98,30 +99,8 @@ namespace follow_wall_cavros{
 
       RCLCPP_INFO(this->get_logger(),"CLOSE\n");
     }
-    
-    
-    
-
-/*
-    if(front_distance < 1 && parallel){
-      //MoveNode::follow_wall();
-    }else{
-      if(angle > -10 && angle < 10){
-        RCLCPP_INFO(this->get_logger(),"RECTOOOOO");
-        x_ = 0.5;
-        z_ = 0.0;
-      }else{
-        x_ = 0.0;
-        if(angle < 0.0){
-          RCLCPP_INFO(this->get_logger(),"Girando izquierda");
-          z_ = 0.2;
-        }else{
-          RCLCPP_INFO(this->get_logger(),"Girando derecha");
-          z_ = 0.2;
-        }
-      }
-    } */
   }
+    
 
 }// namespace 
 
