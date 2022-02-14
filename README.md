@@ -19,6 +19,10 @@ The concept behind is simple, first we get the nearest wall to make an approach,
 
 ## Video
 
+[Video_follow_wall](https://urjc-my.sharepoint.com/:v:/g/personal/v_delatorre_2019_alumnos_urjc_es/EQ-6J4dGqIdFkdbzKaEzwYUB1hhOphRxVuq_pcyPJbiAEw?e=nmGfTf)
+
+
+
 ## Contributors
 * Rubén Montilla Fernández
 * Blanca Soria Rubio
