@@ -23,7 +23,7 @@ namespace follow_wall_cavros{
     //angle range follows:
     //            ^ 0º
     //            | 
-    // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last = 108º) [ angle*3.005 = pos ]
+    // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)  each angle has 3.055 values
 
     for(int i=0 ; i < 666 ; i++){
       //min distance
@@ -31,7 +31,6 @@ namespace follow_wall_cavros{
         min = msg->ranges[i];
         pos = i;
       }
-
     }
 
     angle = ( pos - 329.94 ) / 3.055;
@@ -39,13 +38,6 @@ namespace follow_wall_cavros{
     info.data.push_back(angle);
     info.data.push_back(min);
     info.data.push_back(msg->ranges[131]);
-  /*
-    for ( int i = 0; i< 4; i++){
-      if(sudden_change_angles[i] != 0){
-        info.data.push_back(sudden_change_angles[i]);
-      }
-    }
-    */
 
     laser_info_pub_->publish(info);
 
