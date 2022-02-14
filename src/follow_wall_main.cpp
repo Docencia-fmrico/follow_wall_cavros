@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//#include "rclcpp/rclcpp.hpp"
+// #include "rclcpp/rclcpp.hpp"
 
 #include "follow_wall_cavros/LifeCycle.hpp"
 
+#include <memory>
 
 int main(int argc, char * argv[])
 {

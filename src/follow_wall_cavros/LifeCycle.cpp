@@ -14,47 +14,47 @@
 
 #include "follow_wall_cavros/LifeCycle.hpp"
 
-LifeCycle::LifeCycle() 
+LifeCycle::LifeCycle()
 : LifecycleNode("LifeCycle")
 {
-    pub_node_ = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
-    sub_node_ = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
+  pub_node_ = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
+  sub_node_ = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 }
 
-// -- TRANSICIONES -- 
+// -- TRANSICIONES --
 using CallbackReturnT =
-    rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
+  rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT LifeCycle::on_configure(const rclcpp_lifecycle::State & state)
 {
-    // Se establecen los parametros
-    RCLCPP_INFO(get_logger(), "[%s] On_configure desde [%s]", get_name(), state.label().c_str());
-    return CallbackReturnT::SUCCESS; //FAILURE
+  // Se establecen los parametros
+  RCLCPP_INFO(get_logger(), "[%s] On_configure desde [%s]", get_name(), state.label().c_str());
+  return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT LifeCycle::on_activate(const rclcpp_lifecycle::State & state)
 {
-    // Crear timer + activar publicador (velocidades)
-    RCLCPP_INFO(get_logger(), "[%s] On_activate desde [%s]", get_name(), state.label().c_str());
-    return CallbackReturnT::SUCCESS;
+  // Crear timer + activar publicador (velocidades)
+  RCLCPP_INFO(get_logger(), "[%s] On_activate desde [%s]", get_name(), state.label().c_str());
+  return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT LifeCycle::on_deactivate(const rclcpp_lifecycle::State & state)
 {
-    // Destruir timer + desactivar publicador 
-    RCLCPP_INFO(get_logger(), "[%s] On_deactivate desde [%s]", get_name(), state.label().c_str());
-    return CallbackReturnT::SUCCESS;
+  // Destruir timer + desactivar publicador
+  RCLCPP_INFO(get_logger(), "[%s] On_deactivate desde [%s]", get_name(), state.label().c_str());
+  return CallbackReturnT::SUCCESS;
 }
 
-void 
+void
 LifeCycle::do_work()
 {
-    if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
-        return;
-    }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    return;
+  }
 
-    RCLCPP_INFO(get_logger(), "[%s] Ejecutando do_work...", get_name());
-    pub_node_->pub_vel();
-    rclcpp::spin_some(pub_node_);
-    rclcpp::spin_some(sub_node_);
+  RCLCPP_INFO(get_logger(), "[%s] Ejecutando do_work...", get_name());
+  pub_node_->pub_vel();
+  rclcpp::spin_some(pub_node_);
+  rclcpp::spin_some(sub_node_);
 }

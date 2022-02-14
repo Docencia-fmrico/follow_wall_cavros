@@ -12,26 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//#ifndef FOLLOW_WALL_CAVROS__MOVENODE_HPP_
-//#define FOLLOW_WALL_CAVROS__MOVENODE_HPP_
+#ifndef FOLLOW_WALL_CAVROS__LASERNODE_HPP_
+#define FOLLOW_WALL_CAVROS__LASERNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 
+#include <string>
 
 using std::placeholders::_1;
-using namespace std::chrono_literals;//500ms...
+using namespace std::chrono_literals;  // 500ms...
 
-namespace follow_wall_cavros{
-  class LaserNode : public rclcpp::Node
-  {
-  public:
-    LaserNode(const std::string & name);
-    void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)const;
+namespace follow_wall_cavros
+{
+class LaserNode : public rclcpp::Node
+{
+public:
+  LaserNode(const std::string & name);
+  void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)const;
 
-  private:
-    rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
-    rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
-  };
-}
+private:
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
+  rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
+};
+}  // namespace follow_wall_cavros
+
+#endif  // FOLLOW_WALL_CAVROS__LASERNODE_HPP_
