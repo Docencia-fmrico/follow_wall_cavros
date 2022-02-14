@@ -13,10 +13,10 @@ namespace follow_wall_cavros{
 
   void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const{
     //Laser Range of distances : min = 0.05m ; max = 25m 
-    //los datos en msg->ranges van de derecha a izquierda
-    //hay 665 valores
+    //data in msg->ranges goes from right to left
+    //there are 665 values
 
-    float min = 25, angle ,sudden_change_angles[4] = {0,0,0,0};
+    float min = 25, angle;
     std_msgs::msg::Float32MultiArray info;
     int pos,j = 0;
 
@@ -35,9 +35,9 @@ namespace follow_wall_cavros{
 
     angle = ( pos - 329.94 ) / 3.055;
 
-    info.data.push_back(angle);
+    info.data.push_back(angle);//angle respect to min distance
     info.data.push_back(min);
-    info.data.push_back(msg->ranges[131]);
+    info.data.push_back(msg->ranges[131]);//laser value to detect open doors
 
     laser_info_pub_->publish(info);
 
