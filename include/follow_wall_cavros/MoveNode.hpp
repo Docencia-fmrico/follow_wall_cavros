@@ -32,9 +32,11 @@ namespace follow_wall_cavros{
     void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
 
   private:
-    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // publicador de velocidades 
-    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr dist_sub_; // subscriptor a los datos relevantes del laser 
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_; // speed publisher 
+    rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr dist_sub_; // subscriber to relevant laser data
+                                                                                  //(min distance,angle,dist respect to laser pos 131)
 
+    //speeds
     float x_;
     float y_;
     float z_;

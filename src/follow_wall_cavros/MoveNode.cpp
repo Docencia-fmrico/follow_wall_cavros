@@ -45,62 +45,54 @@ namespace follow_wall_cavros{
     float angle = msg->data[0] , min_distance = msg->data[1], right_distance = msg->data[2];
     bool parallel = false;
 
-    RCLCPP_INFO(this->get_logger(),"dist: %f ; angle : %f , right _dist: %f\n",min_distance,angle,right_distance);
-
     //aproach to wall
     if(min_distance > 0.7){
       if(angle > 10 ){
-        z_ = 0.2;
-
+        z_ = 0.2;//rotate left to face wall 
         if(angle < 20){
           x_ = 0.2;
         }else{
           x_ = 0.0;
         }
       }else if(angle < -10){
-        z_ = -0.2;
-
+        z_ = -0.2;//rotate right to face wall 
         if(angle > -20){
           x_ = 0.2;
         }else{
           x_ = 0.0;
         }
       
-      }else{
+      }else{//going wall
         z_ = 0.0;
         x_ = 0.35;
       }
-      RCLCPP_INFO(this->get_logger(),"APROACHING\n");
-
     }else { // already close to wall
       
       //lineal
-      if(angle > -105 && angle < -75){
+      if(angle > -105 && angle < -75){//parallel to wall
         x_ = 0.3;
-      }else if(min_distance < 0.3){
-        x_ = -0.1;
+      }else if(min_distance < 0.3){//too close to wall go back
+        x_ = -0.05;
       }else{
         x_ = 0;
       }
 
       //angular
-      if(angle < -95 ){
+      if(angle < -95 ){//turn right
         z_ = -0.2;
-      }else if(angle > -85 ){
+      }else if(angle > -85 ){//turn left
         z_ = 0.2;
       }else{
         z_ = 0.0;
       }
 
-      if(right_distance > 2.5){
+      if(right_distance > 2.5){//detect open door
         z_ = -0.3;
         x_ = 0.3;
       }
 
-      RCLCPP_INFO(this->get_logger(),"CLOSE\n");
     }
   }
-    
-
+  
 }// namespace 
 
