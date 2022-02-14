@@ -32,7 +32,6 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // data in msg->ranges goes from right to left
   // there are 665 values
 
-  float min = 25, angle;
   std_msgs::msg::Float32MultiArray info;
   int pos, j = 0;
 
@@ -42,19 +41,22 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)
   // each angle has 3.055 values
 
+  min_ = 25;
+  door_distance_ = msg->ranges[131];
+
   for (int i = 0; i < 666; i++) {
     // min distance
-    if (msg->ranges[i] < min) {
-      min = msg->ranges[i];
+    if (msg->ranges[i] < min_) {
+      min_ = msg->ranges[i];
       pos = i;
     }
   }
 
-  angle = ( pos - 329.94 ) / 3.055;
+  angle_ = ( pos - 329.94 ) / 3.055;
 
-  info.data.push_back(angle);  // angle respect to min distance
-  info.data.push_back(min);
-  info.data.push_back(msg->ranges[131]);  // laser value to detect open doors
+  info.data.push_back(angle_);  // angle respect to min distance
+  info.data.push_back(min_);
+  info.data.push_back(door_distance_);  // laser value to detect open doors
 
   laser_info_pub_->publish(info);
 }

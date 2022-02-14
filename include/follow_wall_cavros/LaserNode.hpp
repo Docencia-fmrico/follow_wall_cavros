@@ -35,6 +35,9 @@ public:
 private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
+  float min_;
+  float angle_;
+  float door_distance_;
 };
 }  // namespace follow_wall_cavros
 

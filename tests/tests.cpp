@@ -20,16 +20,102 @@
 #include "std_msgs/msg/string.hpp"
 
 #include "follow_wall-cavros/LaserNode.hpp"
+#include "follow_wall-cavros/MoveNode.hpp"
 
 TEST(test_node, velocity)
 {
+  auto node = std::make_shared<follow_wall_cavros::MoveNode>();
+
+  auto test_node = rclcpp::Node::make_shared("test_node");
+  auto vel_pub = test_node->create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
+
+  rclcpp::executors::SingleThreadedExecutor exe;
+  exe.add_node(node);
+  exe.add_node(test_node);
+
+  bool finish = false;
+  std::thread t([&]() {
+      while (!finish) {exe.spin_some();}
+    });
+  
+  std_msgs::msg::Float32MultiArray msg;
+
+  msg.data.push_back(45);
+  msg.data.push_back(0.5);
+  msg.data.push_back(100);
+
+  vel_pub->publish(msg);
+
+  {
+    rclcpp::Rate rate(10);
+    auto start = test_node->now();
+    while ((test_node->now() - start).seconds() < 0.5) {
+      rate.sleep();
+    }
+  }
+
+  ASSERT_EQ(0.0, node->get_linear());
+  ASSERT_EQ(0.2, node->get_angular());
+
+  msg.data.push_back(0);
+  msg.data.push_back(1);
+  msg.data.push_back(100);
+
+  vel_pub->publish(msg);
+
+  {
+    rclcpp::Rate rate(10);
+    auto start = test_node->now();
+    while ((test_node->now() - start).seconds() < 0.5) {
+      rate.sleep();
+    }
+  }
+
+  ASSERT_EQ(0.35, node->get_linear());
+  ASSERT_EQ(0.0, node->get_angular());
+
+  finish = true;
+  t.join();
 }
 
 TEST(test_node, distance)
 {
-  auto node = std::make_shared<follow_wall-cavros::LaserNode>();
+  auto node = std::make_shared<follow_wall_cavros::LaserNode>();
 
-  ASSERT_EQ("", node->get_last_msg());
+  auto test_node = rclcpp::Node::make_shared("test_node");
+  auto laser_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>("laser_info", 10);
+
+  rclcpp::executors::SingleThreadedExecutor exe;
+  exe.add_node(node);
+  exe.add_node(test_node);
+
+  bool finish = false;
+  std::thread t([&]() {
+      while (!finish) {exe.spin_some();}
+    });
+  
+  sensor_msgs::msg::LaserScan laser;
+
+  for (int i = 0; i < 666; i++) {
+    laser->ranges[i] = 100;
+  }
+  laser->ranges[131] = 2;
+
+  {
+    rclcpp::Rate rate(10);
+    auto start = test_node->now();
+    while ((test_node->now() - start).seconds() < 0.5) {
+      rate.sleep();
+    }
+  }
+
+  // Vector con las tres variables
+
+  ASSERT_EQ(0.0, node->get_linear());
+  ASSERT_EQ(0.2, node->get_angular());
+
+  finish = true;
+  t.join();
 }
 
 
