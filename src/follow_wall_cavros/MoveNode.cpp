@@ -48,7 +48,7 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
 
   // aproach to wall
   if (min_distance > 0.7) {
-    if (angle > 10 ) {
+    if (angle > 10) {
       z_ = 0.2;  // rotate left to face wall
       if (angle < 20) {
         x_ = 0.2;
@@ -77,9 +77,9 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
     }
 
     // angular
-    if (angle < -95 ) {  // turn right
+    if (angle < -95) {  // turn right
       z_ = -0.2;
-    } else if(angle > -85 ) {  // turn left
+    } else if(angle > -85) {  // turn left
       z_ = 0.2;
     } else {
       z_ = 0.0;
