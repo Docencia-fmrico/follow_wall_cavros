@@ -20,7 +20,7 @@ The concept behind is simple, first we get the nearest wall to make an approach,
 ## Video
 
 ## Contributors
-*Rubén Montilla Fernández
-*Blanca Soria Rubio
-*Victor de la Torre Rosa
-*Cristian Sánchez Rodríguez 
+* Rubén Montilla Fernández
+* Blanca Soria Rubio
+* Victor de la Torre Rosa
+* Cristian Sánchez Rodríguez 
