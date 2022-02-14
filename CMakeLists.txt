@@ -28,17 +28,17 @@ add_library(${PROJECT_NAME} SHARED
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(follow_line_main src/follow_line_main.cpp)
-ament_target_dependencies(follow_line_main ${dependencies})
+add_executable(follow_wall_main src/follow_wall_main.cpp)
+ament_target_dependencies(follow_wall_main ${dependencies})
 
-target_link_libraries(follow_line_main ${PROJECT_NAME})
+target_link_libraries(follow_wall_main ${PROJECT_NAME})
 
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
-  follow_line_main
+  follow_wall_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

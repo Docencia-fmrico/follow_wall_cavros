@@ -15,9 +15,10 @@
 #include "follow_wall_cavros/LifeCycle.hpp"
 
 LifeCycle::LifeCycle() 
-: LifecycleNode("lifecycle_node_example")
+: LifecycleNode("LifeCycle")
 {
-    // Para declarar parámetros p.ej
+    pub_node_ = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
+    sub_node_ = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
 }
 
 // -- TRANSICIONES -- 
@@ -27,38 +28,33 @@ using CallbackReturnT =
 CallbackReturnT LifeCycle::on_configure(const rclcpp_lifecycle::State & state)
 {
     // Se establecen los parametros
+    RCLCPP_INFO(get_logger(), "[%s] On_configure desde [%s]", get_name(), state.label().c_str());
     return CallbackReturnT::SUCCESS; //FAILURE
 }
 
 CallbackReturnT LifeCycle::on_activate(const rclcpp_lifecycle::State & state)
 {
     // Crear timer + activar publicador (velocidades)
+    RCLCPP_INFO(get_logger(), "[%s] On_activate desde [%s]", get_name(), state.label().c_str());
     return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT LifeCycle::on_deactivate(const rclcpp_lifecycle::State & state)
 {
     // Destruir timer + desactivar publicador 
-    return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT LifeCycle::on_cleanup(const rclcpp_lifecycle::State & state)
-{
-    return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT LifeCycle::on_shutdown(const rclcpp_lifecycle::State & state)
-{
-    return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT LifeCycle::on_error(const rclcpp_lifecycle::State & state)
-{
+    RCLCPP_INFO(get_logger(), "[%s] On_deactivate desde [%s]", get_name(), state.label().c_str());
     return CallbackReturnT::SUCCESS;
 }
 
 void 
 LifeCycle::do_work()
 {
+    if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+        return;
+    }
 
+    RCLCPP_INFO(get_logger(), "[%s] Ejecutando do_work...", get_name());
+    pub_node_->pub_vel();
+    rclcpp::spin_some(pub_node_);
+    rclcpp::spin_some(sub_node_);
 }

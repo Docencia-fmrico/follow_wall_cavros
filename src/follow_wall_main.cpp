@@ -14,8 +14,7 @@
 
 //#include "rclcpp/rclcpp.hpp"
 
-#include "follow_wall_cavros/MoveNode.hpp"
-#include "follow_wall_cavros/LaserNode.hpp"
+#include "follow_wall_cavros/LifeCycle.hpp"
 
 
 int main(int argc, char * argv[])
@@ -29,13 +28,16 @@ int main(int argc, char * argv[])
   //auto node = rclcpp::Node::make_shared("simple_node"); //constructor del nodo y le pasas su nombre
   auto pub_node = std::make_shared<follow_wall_cavros::MoveNode>("Move_node");
   auto sub_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node");
+  auto life_node = std::make_shared<LifeCycle>();
 
   rclcpp::Rate loop_rate(300ms);
 
   while (rclcpp::ok()) {
-    pub_node->pub_vel();
-    rclcpp::spin_some(pub_node);
-    rclcpp::spin_some(sub_node);
+    life_node->do_work();
+    // pub_node->pub_vel();
+    // rclcpp::spin_some(pub_node);
+    // rclcpp::spin_some(sub_node);
+    rclcpp::spin_some(life_node->get_node_base_interface());
     loop_rate.sleep();
   }
 
