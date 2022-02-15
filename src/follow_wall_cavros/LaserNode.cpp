@@ -26,7 +26,7 @@ LaserNode::LaserNode(const std::string & name)
   laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
 }
 
-void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const
+void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
   // Laser Range of distances : min = 0.05m ; max = 25m
   // data in msg->ranges goes from right to left
