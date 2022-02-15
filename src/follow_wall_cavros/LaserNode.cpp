@@ -14,6 +14,8 @@
 
 #include "follow_wall_cavros/LaserNode.hpp"
 
+#define DOOR_ANGLE -M_PI/6
+
 using namespace std::chrono_literals;  // 500ms...
 
 namespace follow_wall_cavros
@@ -33,7 +35,7 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // there are 665 values
 
   std_msgs::msg::Float32MultiArray info;
-  int pos, j = 0;
+  int pos, j = 0, n_positions, door_position;
 
   // angle range follows:
   //            ^ 0º
@@ -41,10 +43,12 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)
   // each angle has 3.055 values
 
-  min_ = 25;
-  door_distance_ = msg->ranges[131];
+  door_position = (DOOR_ANGLE - msg->angle_min) / msg->angle_increment;
+  door_distance_ = msg->ranges[door_position];
 
-  for (int i = 0; i < 666; i++) {
+  n_positions = (msg->angle_max - msg->angle_min) / msg->angle_increment;
+  min_ = 25;
+  for (int i = 0; i < n_positions; i++) {
     // min distance
     if (msg->ranges[i] < min_) {
       min_ = msg->ranges[i];
@@ -52,7 +56,8 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
     }
   }
 
-  angle_ = ( pos - 329.94 ) / 3.055;
+  angle_ = ( pos * msg->angle_increment) + msg->angle_min;
+  angle_ = angle_ * 180/M_PI;
 
   info.data.push_back(angle_);  // angle respect to min distance
   info.data.push_back(min_);

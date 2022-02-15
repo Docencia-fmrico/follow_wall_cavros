@@ -70,7 +70,7 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
       if (angle > -20) {
         x_ = 0.2;
       } else {
-        x_ = 0.0;
+        x_ = 0.1;
       }
     } else {  // going wall
       z_ = 0.0;
