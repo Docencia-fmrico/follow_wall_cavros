@@ -97,9 +97,9 @@ TEST(test_node, distance)
   sensor_msgs::msg::LaserScan laser;
 
   for (int i = 0; i < 666; i++) {
-    laser->ranges[i] = 100;
+    laser->ranges[i] = 2;
   }
-  laser->ranges[131] = 2;
+  laser->ranges[330] = 1;
 
   {
     rclcpp::Rate rate(10);
@@ -109,10 +109,28 @@ TEST(test_node, distance)
     }
   }
 
-  // Vector con las tres variables
+  ASSERT_EQ(0, (int)node->get_angle());
+  ASSERT_EQ(1, node->get_min_distance());
+  ASSERT_EQ(false, node->open_door());
 
-  ASSERT_EQ(0.0, node->get_linear());
-  ASSERT_EQ(0.2, node->get_angular());
+
+  for (int i = 0; i < 666; i++) {
+     laser->ranges[i] = 2;
+  }
+  laser->ranges[54] = 1.5;
+  laser->ranges[313] = 3;
+
+  {
+    rclcpp::Rate rate(10);
+    auto start = test_node->now();
+    while ((test_node->now() - start).seconds() < 0.5) {
+      rate.sleep();
+    }
+  }
+
+  ASSERT_EQ(-90, (int)node->get_angle());
+  ASSERT_EQ(1, node->get_min_distance());
+  ASSERT_EQ(false, node->open_door());
 
   finish = true;
   t.join();

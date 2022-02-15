@@ -60,4 +60,20 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 
   laser_info_pub_->publish(info);
 }
+
+float LaserNode::get_angle(void)
+{
+  return angle_;
+}
+
+float LaserNode::get_min_distance(void)
+{
+  return min_;
+}
+
+bool LaserNode::door_open(void)
+{
+  return door_distance_ > 2.5;
+}
+
 }  // namespace follow_wall_cavros
