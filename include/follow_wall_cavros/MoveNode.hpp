@@ -33,6 +33,8 @@ public:
   MoveNode(const std::string & name);
   void pub_vel(void);
   void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
+  float return_linear();
+  float return_angular();
 
 private:
   // speed publisher

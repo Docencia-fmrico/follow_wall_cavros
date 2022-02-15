@@ -26,13 +26,12 @@ LaserNode::LaserNode(const std::string & name)
   laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
 }
 
-void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const
+void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
 {
   // Laser Range of distances : min = 0.05m ; max = 25m
   // data in msg->ranges goes from right to left
   // there are 665 values
 
-  float min = 25, angle;
   std_msgs::msg::Float32MultiArray info;
   int pos, j = 0;
 
@@ -42,20 +41,39 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)
   // each angle has 3.055 values
 
+  min_ = 25;
+  door_distance_ = msg->ranges[131];
+
   for (int i = 0; i < 666; i++) {
     // min distance
-    if (msg->ranges[i] < min) {
-      min = msg->ranges[i];
+    if (msg->ranges[i] < min_) {
+      min_ = msg->ranges[i];
       pos = i;
     }
   }
 
-  angle = ( pos - 329.94 ) / 3.055;
+  angle_ = ( pos - 329.94 ) / 3.055;
 
-  info.data.push_back(angle);  // angle respect to min distance
-  info.data.push_back(min);
-  info.data.push_back(msg->ranges[131]);  // laser value to detect open doors
+  info.data.push_back(angle_);  // angle respect to min distance
+  info.data.push_back(min_);
+  info.data.push_back(door_distance_);  // laser value to detect open doors
 
   laser_info_pub_->publish(info);
 }
+
+float LaserNode::get_angle(void)
+{
+  return angle_;
+}
+
+float LaserNode::get_min_distance(void)
+{
+  return min_;
+}
+
+bool LaserNode::door_open(void)
+{
+  return door_distance_ > 2.5;
+}
+
 }  // namespace follow_wall_cavros

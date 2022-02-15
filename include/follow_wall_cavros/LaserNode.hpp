@@ -30,11 +30,21 @@ class LaserNode : public rclcpp::Node
 {
 public:
   LaserNode(const std::string & name);
-  void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)const;
+  void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
 
 private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
+  
+  //for testing:
+  float min_;
+  float angle_;
+  float door_distance_;
+
+  float get_angle(void);
+  float get_min_distance(void);
+  bool door_open(void);
+
 };
 }  // namespace follow_wall_cavros
 

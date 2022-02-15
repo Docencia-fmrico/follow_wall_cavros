@@ -41,6 +41,16 @@ void MoveNode::pub_vel(void)
   vel_pub_->publish(msg_vel);
 }
 
+float MoveNode::return_linear()
+{
+  return x_;
+}
+
+float MoveNode::return_angular()
+{
+  return z_;
+}
+
 void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg)
 {
   float angle = msg->data[0], min_distance = msg->data[1], right_distance = msg->data[2];
