@@ -22,6 +22,9 @@
 #include "follow_wall_cavros/LaserNode.hpp"
 
 #include <memory>
+#include <chrono>
+
+using namespace std::chrono_literals;  // 500ms...
 
 using rcl_interfaces::msg::ParameterType;
 using std::placeholders::_1;
@@ -29,7 +32,7 @@ using std::placeholders::_1;
 class LifeCycle : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  LifeCycle();
+  LifeCycle(const std::string & name, const std::chrono::nanoseconds & rate);
   using CallbackReturnT =
     rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
@@ -40,7 +43,9 @@ public:
   void do_work();
 private:
   std::shared_ptr<follow_wall_cavros::MoveNode> pub_node_;
-  std::shared_ptr<follow_wall_cavros::LaserNode> sub_node_;
+
+  // rclcpp::TimerBase::SharedPtr timer_;
+  // rclcpp_lifecycle::LifecyclePublisher<std_msgs::msg::Float64>::SharedPtr pub_;
 };
 
 #endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_

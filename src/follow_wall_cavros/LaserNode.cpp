@@ -20,12 +20,21 @@ using namespace std::chrono_literals;  // 500ms...
 
 namespace follow_wall_cavros
 {
-LaserNode::LaserNode(const std::string & name)
+LaserNode::LaserNode(const std::string & name, const std::chrono::nanoseconds & rate)
 : Node(name)
 {
   sub_laser_ = create_subscription<sensor_msgs::msg::LaserScan>(
     "scan_raw", 10, std::bind(&LaserNode::Laser_callback, this, _1));
   laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
+
+  timer_ = create_wall_timer(
+    rate, std::bind(&LaserNode::laser_pub_callback, this));
+}
+
+void
+LaserNode::laser_pub_callback()
+{
+  laser_info_pub_->publish(info_); 
 }
 
 void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
@@ -34,7 +43,7 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // data in msg->ranges goes from right to left
   // there are 665 values
 
-  std_msgs::msg::Float32MultiArray info;
+
   int pos, j = 0, n_positions, door_position;
 
   // angle range follows:
@@ -59,11 +68,11 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   angle_ = ( pos * msg->angle_increment) + msg->angle_min;
   angle_ = angle_ * 180/M_PI;
 
-  info.data.push_back(angle_);  // angle respect to min distance
-  info.data.push_back(min_);
-  info.data.push_back(door_distance_);  // laser value to detect open doors
+  info_.data.push_back(angle_);  // angle respect to min distance
+  info_.data.push_back(min_);
+  info_.data.push_back(door_distance_);  // laser value to detect open doors
 
-  laser_info_pub_->publish(info);
+  // laser_info_pub_->publish(info);
 }
 
 float LaserNode::get_angle(void)
