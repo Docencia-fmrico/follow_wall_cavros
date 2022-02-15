@@ -22,6 +22,7 @@
 #include "follow_wall-cavros/LaserNode.hpp"
 #include "follow_wall-cavros/MoveNode.hpp"
 
+// Test for velocity check (Motors)
 TEST(test_node, velocity)
 {
   auto node = std::make_shared<follow_wall_cavros::MoveNode>();
@@ -78,6 +79,7 @@ TEST(test_node, velocity)
   t.join();
 }
 
+// Test for distances check (Laser)
 TEST(test_node, distance)
 {
   auto node = std::make_shared<follow_wall_cavros::LaserNode>();
