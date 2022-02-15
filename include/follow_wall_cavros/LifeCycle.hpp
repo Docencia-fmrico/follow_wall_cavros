@@ -38,6 +38,7 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   void do_work();
+
 private:
   std::shared_ptr<follow_wall_cavros::MoveNode> pub_node_;
   std::shared_ptr<follow_wall_cavros::LaserNode> sub_node_;

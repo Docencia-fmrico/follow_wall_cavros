@@ -19,15 +19,15 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 
-#include "follow_wall-cavros/LaserNode.hpp"
-#include "follow_wall-cavros/MoveNode.hpp"
+#include "follow_wall_cavros/LaserNode.hpp"
+#include "follow_wall_cavros/MoveNode.hpp"
 
 // Test for velocity check (Motors)
 TEST(test_node, velocity)
 {
-  auto node = std::make_shared<follow_wall_cavros::MoveNode>();
+  auto node = std::make_shared<follow_wall_cavros::MoveNode>("test_move_node");
 
-  auto test_node = rclcpp::Node::make_shared("test_node");
+  auto test_node = rclcpp::Node::make_shared("test_pub_move_node");
   auto vel_pub = test_node->create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
 
   rclcpp::executors::SingleThreadedExecutor exe;
@@ -38,7 +38,7 @@ TEST(test_node, velocity)
   std::thread t([&]() {
       while (!finish) {exe.spin_some();}
     });
-  
+
   std_msgs::msg::Float32MultiArray msg;
 
   msg.data.push_back(45);
@@ -55,7 +55,7 @@ TEST(test_node, velocity)
     }
   }
 
-  ASSERT_EQ(0.0, node->get_linear());
+  ASSERT_EQ(0.3, node->get_linear());
   ASSERT_EQ(0.2, node->get_angular());
 
   msg.data.push_back(0);
@@ -82,9 +82,9 @@ TEST(test_node, velocity)
 // Test for distances check (Laser)
 TEST(test_node, distance)
 {
-  auto node = std::make_shared<follow_wall_cavros::LaserNode>();
+  auto node = std::make_shared<follow_wall_cavros::LaserNode>("test_laser_node");
 
-  auto test_node = rclcpp::Node::make_shared("test_node");
+  auto test_node = rclcpp::Node::make_shared("test_pub_laser_node");
   auto laser_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>("laser_info", 10);
 
   rclcpp::executors::SingleThreadedExecutor exe;
@@ -95,13 +95,13 @@ TEST(test_node, distance)
   std::thread t([&]() {
       while (!finish) {exe.spin_some();}
     });
-  
+
   sensor_msgs::msg::LaserScan laser;
 
   for (int i = 0; i < 666; i++) {
-    laser->ranges[i] = 2;
+    laser.ranges[i] = 2;
   }
-  laser->ranges[330] = 1;
+  laser.ranges[330] = 1;
 
   {
     rclcpp::Rate rate(10);
@@ -113,14 +113,14 @@ TEST(test_node, distance)
 
   ASSERT_EQ(0, (int)node->get_angle());
   ASSERT_EQ(1, node->get_min_distance());
-  ASSERT_EQ(false, node->open_door());
+  ASSERT_EQ(false, node->door_open());
 
 
   for (int i = 0; i < 666; i++) {
-     laser->ranges[i] = 2;
+    laser.ranges[i] = 2;
   }
-  laser->ranges[54] = 1.5;
-  laser->ranges[313] = 3;
+  laser.ranges[54] = 1.5;
+  laser.ranges[313] = 3;
 
   {
     rclcpp::Rate rate(10);
@@ -132,7 +132,7 @@ TEST(test_node, distance)
 
   ASSERT_EQ(-90, (int)node->get_angle());
   ASSERT_EQ(1, node->get_min_distance());
-  ASSERT_EQ(false, node->open_door());
+  ASSERT_EQ(false, node->door_open());
 
   finish = true;
   t.join();

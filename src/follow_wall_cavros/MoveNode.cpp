@@ -41,12 +41,12 @@ void MoveNode::pub_vel(void)
   vel_pub_->publish(msg_vel);
 }
 
-float MoveNode::return_linear()
+float MoveNode::get_linear()
 {
   return x_;
 }
 
-float MoveNode::return_angular()
+float MoveNode::get_angular()
 {
   return z_;
 }
@@ -89,7 +89,7 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
     // angular
     if (angle < -95) {  // turn right
       z_ = -0.2;
-    } else if(angle > -85) {  // turn left
+    } else if (angle > -85) {  // turn left
       z_ = 0.2;
     } else {
       z_ = 0.0;
