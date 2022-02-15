@@ -14,6 +14,9 @@
 
 #include "follow_wall_cavros/MoveNode.hpp"
 
+#define ANGULAR_VEL 0.2
+#define LINEAR_VEL 0.2
+
 using namespace std::chrono_literals;  // 500ms...
 using std::placeholders::_1;
 
@@ -58,46 +61,54 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
 
   // aproach to wall
   if (min_distance > 0.7) {
-    if (angle > 10) {
-      z_ = 0.2;  // rotate left to face wall
-      if (angle < 20) {
-        x_ = 0.2;
-      } else {
-        x_ = 0.0;
-      }
-    } else if (angle < -10) {
-      z_ = -0.2;  // rotate right to face wall
-      if (angle > -20) {
-        x_ = 0.2;
-      } else {
-        x_ = 0.0;
-      }
-    } else {  // going wall
-      z_ = 0.0;
-      x_ = 0.35;
+    
+    //linear
+    if (fabs(angle) < 10) {
+      x_ = LINEAR_VEL * 1.5;
+    } else if (fabs(angle) < 20) {
+      x_ = LINEAR_VEL;
+    } else {
+      x_ = LINEAR_VEL / 2;
     }
+    
+    //angular
+    if (angle > 10) {
+      z_ = ANGULAR_VEL; // rotate left to face wall
+    } else if (angle < -10) {
+      z_ = -ANGULAR_VEL; // rotate right to face wall
+    } else {
+      z_ = 0.0; // aproach wall
+    }
+
   } else {  // already close to wall
+    
     // lineal
     if (angle > -105 && angle < -75) {  // parallel to wall
-      x_ = 0.3;
+      x_ = LINEAR_VEL + 0.1;
     } else if (min_distance < 0.3) {  // too close to wall go back
-      x_ = -0.05;
+      x_ = -LINEAR_VEL / 4;
     } else {
-      x_ = 0;
+      x_ = LINEAR_VEL/6;
     }
 
     // angular
     if (angle < -95) {  // turn right
-      z_ = -0.2;
+      z_ = -ANGULAR_VEL;
     } else if(angle > -85) {  // turn left
-      z_ = 0.2;
+      z_ = ANGULAR_VEL;
     } else {
       z_ = 0.0;
     }
 
-    if (right_distance > 2.5) {  // detect open door
-      z_ = -0.3;
-      x_ = 0.3;
+    if (right_distance > 2.5 && angle < 0) {  // detect open door
+      if (min_distance < 0.5) {
+        x_ = 0.42;
+        z_ = -0.5;
+      } else {
+        x_ = 0.32;
+        z_ = -0.3;
+      }
+      
     }
   }
 }
