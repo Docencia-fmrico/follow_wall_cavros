@@ -49,9 +49,7 @@ private:
 
   // timers
   rclcpp::TimerBase::SharedPtr timer_;
-
   std_msgs::msg::Float32MultiArray info_;
-
 };
 }  // namespace follow_wall_cavros
 
