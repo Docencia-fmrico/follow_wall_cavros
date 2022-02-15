@@ -13,6 +13,7 @@ The concept behind is simple, first we get the nearest wall to make an approach,
 
 ## Laser
 LaserNode's job is to capture the laser perception of the robot and choose its relevant information that later will be published in /laser_info topic.
+
 These relevant information consists in the minimum distance to a wall , its angle respect to the robot and a particular reading that will help the movement node to detect if the robot is aproaching to an open door.
 
 ## Motors
@@ -21,6 +22,9 @@ The motors are controlled inside MoveNode's implementation. This node receives i
 In this node tiago's behavior is separated into two states : aproaching the nearest wall and following it , with all the problematics that each state overrides. 
 
 ## Conclusions
+In conclusion, Tiago is able to follow a wall using simple sensor/actuators.
+
+For extensibility reasons, we capsuled everything in a lifecycle node, where we can switch between 3 states, unconfigure, inactive and active. This last one is where the job is done.
 
 ## Video
 
