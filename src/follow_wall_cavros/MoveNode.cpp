@@ -122,8 +122,8 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
     }
 
     if (angle > -110 && angle < -70 && right_distance > 2.5) {  // detect open door
-      x_ = 0.3;//LINEAR_VEL-0.05;
-      z_ = -0.3;//- ( (LINEAR_VEL/1.8) / min_distance); //-(ANGULAR_VEL*1.7);
+      x_ = 0.4;//LINEAR_VEL-0.05;
+      z_ = -0.4;//- ( (LINEAR_VEL/1.8) / min_distance); //-(ANGULAR_VEL*1.7);
     }
   }
 }
