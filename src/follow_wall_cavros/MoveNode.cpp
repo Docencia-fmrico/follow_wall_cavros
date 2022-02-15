@@ -79,35 +79,14 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
     } else {
       z_ = 0.0; // aproach wall
     }
-  /*
-    
-    if (angle > 10) {
-      z_ = ANGULAR_VEL;  // rotate left to face wall
-      if (angle < 20) {
-        x_ = LINEAR_VEL;
-      } else {
-        x_ = LINEAR_VEL/2;
-      }
-    } else if (angle < -10) {
-      z_ = -ANGULAR_VEL;  // rotate right to face wall
-      if (angle > -20) {
-        x_ = LINEAR_VEL;
-      } else {
-        x_ = LINEAR_VEL/2;
-      }
-    } else {  // going wall
-      z_ = 0.0;
-      x_ = LINEAR_VEL * 1.5;
-    }
 
-    */
   } else {  // already close to wall
     
     // lineal
     if (angle > -105 && angle < -75) {  // parallel to wall
       x_ = LINEAR_VEL + 0.1;
     } else if (min_distance < 0.3) {  // too close to wall go back
-      x_ = -LINEAR_VEL / 6;
+      x_ = -LINEAR_VEL / 4;
     } else {
       x_ = LINEAR_VEL/6;
     }
@@ -121,9 +100,15 @@ void MoveNode::distance_callback(const std_msgs::msg::Float32MultiArray::SharedP
       z_ = 0.0;
     }
 
-    if (angle > -110 && angle < -70 && right_distance > 2.5) {  // detect open door
-      x_ = 0.4;//LINEAR_VEL-0.05;
-      z_ = -0.4;//- ( (LINEAR_VEL/1.8) / min_distance); //-(ANGULAR_VEL*1.7);
+    if (right_distance > 2.5 && angle < 0) {  // detect open door
+      if (min_distance < 0.5) {
+        x_ = 0.42;
+        z_ = -0.5;
+      } else {
+        x_ = 0.32;
+        z_ = -0.3;
+      }
+      
     }
   }
 }
