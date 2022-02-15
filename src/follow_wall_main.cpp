@@ -15,6 +15,11 @@
 // #include "rclcpp/rclcpp.hpp"
 
 #include "follow_wall_cavros/LifeCycle.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+#include "rclcpp/rclcpp.hpp"
+#include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "follow_wall_cavros/MoveNode.hpp"
+#include "follow_wall_cavros/LaserNode.hpp"
 
 #include <memory>
 
@@ -22,15 +27,21 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
+  auto laser_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node", 500ms);
   auto life_node = std::make_shared<LifeCycle>();
 
-  rclcpp::Rate loop_rate(300ms);
+  rclcpp::executors::MultiThreadedExecutor executor;
 
-  while (rclcpp::ok()) {
-    life_node->do_work();
-    rclcpp::spin_some(life_node->get_node_base_interface());
-    loop_rate.sleep();
-  }
+  executor.add_node(laser_node);
+  executor.spin();
+
+  // rclcpp::Rate loop_rate(300ms);
+
+  // while (rclcpp::ok()) {
+  //   life_node->do_work();
+  //   rclcpp::spin_some(life_node->get_node_base_interface());
+  //   loop_rate.sleep();
+  // }
 
   rclcpp::shutdown();
 
