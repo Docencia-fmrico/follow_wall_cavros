@@ -41,11 +41,23 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   void do_work();
-private:
-  std::shared_ptr<follow_wall_cavros::MoveNode> pub_node_;
+  void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
+  void choose_speeds(void);
+  void publish_vel(void);
 
-  // rclcpp::TimerBase::SharedPtr timer_;
-  // rclcpp_lifecycle::LifecyclePublisher<std_msgs::msg::Float64>::SharedPtr pub_;
+private:
+
+  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp_lifecycle::LifecyclePublisher<geometry_msgs::msg::Twist>::SharedPtr pub_;
+  rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_;
+
+  //subscription inforamtion
+  float angle_;
+  float right_distance_;
+  float min_distance_;
+
+  float x_;
+  float z_;
 };
 
 #endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_

@@ -32,7 +32,7 @@ class LaserNode : public rclcpp::Node
 public:
   LaserNode(const std::string & name, const std::chrono::nanoseconds & rate);
   void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
-  void laser_pub_callback();
+  void publish_laser_info(void);
 
 private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
@@ -49,7 +49,6 @@ private:
 
   // timers
   rclcpp::TimerBase::SharedPtr timer_;
-  std_msgs::msg::Float32MultiArray info_;
 };
 }  // namespace follow_wall_cavros
 
