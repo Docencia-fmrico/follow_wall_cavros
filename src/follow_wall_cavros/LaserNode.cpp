@@ -14,7 +14,7 @@
 
 #include "follow_wall_cavros/LaserNode.hpp"
 
-#define DOOR_ANGLE -M_PI/6
+#define DOOR_ANGLE -(M_PI/6)*2
 
 using namespace std::chrono_literals;  // 500ms...
 
