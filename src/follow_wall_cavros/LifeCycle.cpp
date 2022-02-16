@@ -131,6 +131,8 @@ void LifeCycle::choose_speeds(void)
       }
     }
   }
+  x_ = std::clamp(x_,-0.2f, 0.2f);
+  z_ = std::clamp(z_,-0.4f, 0.4f);
 }
 
 void LifeCycle::publish_vel(void)

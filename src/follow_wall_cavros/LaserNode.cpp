@@ -51,11 +51,13 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   n_positions = (msg->angle_max - msg->angle_min) / msg->angle_increment;
   min_ = 25;
   for (int i = 0; i < n_positions; i++) {
-    // min distance
-    if (msg->ranges[i] < min_) {
-      min_ = msg->ranges[i];
-      pos = i;
-    }
+    if (!(std::isinf(msg->ranges[i]) || std::isnan(msg->ranges[i]))){
+      // min distance
+      if (msg->ranges[i] < min_) {
+        min_ = msg->ranges[i];
+        pos = i;
+      }
+    }   
   }
 
   angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180/M_PI;
