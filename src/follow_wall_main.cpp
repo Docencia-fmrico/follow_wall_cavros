@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// #include "rclcpp/rclcpp.hpp"
 
 #include "follow_wall_cavros/LifeCycle.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
@@ -25,12 +24,12 @@
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
+  std::cout << "ssss" <<std::endl;
 
   auto laser_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node", 500ms);
-  auto life_node = std::make_shared<LifeCycle>("LifeCycle", 300ms);
+  auto life_node = std::make_shared<LifeCycle>("LifeCycle", 500ms);
 
   rclcpp::executors::MultiThreadedExecutor executor;
-
   executor.add_node(laser_node);
   executor.add_node(life_node->get_node_base_interface());
   executor.spin();

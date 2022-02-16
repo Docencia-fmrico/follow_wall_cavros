@@ -1,0 +1,4 @@
+make[2]: *** [CMakeFiles/follow_wall_cavros.dir/build.make:63: CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LifeCycle.cpp.o] Interrupt
+make[2]: *** [CMakeFiles/follow_wall_cavros.dir/build.make:76: CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LaserNode.cpp.o] Interrupt
+make[1]: *** [CMakeFiles/Makefile2:121: CMakeFiles/follow_wall_cavros.dir/all] Interrupt
+make: *** [Makefile:141: all] Interrupt

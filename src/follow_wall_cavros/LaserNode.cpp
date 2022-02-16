@@ -24,7 +24,7 @@ LaserNode::LaserNode(const std::string & name, const std::chrono::nanoseconds & 
 : Node(name)
 {
   sub_laser_ = create_subscription<sensor_msgs::msg::LaserScan>(
-    "scan_raw", 10, std::bind(&LaserNode::Laser_callback, this, _1));
+    "/scan_filtered", 10, std::bind(&LaserNode::Laser_callback, this, _1));
   laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
 
   timer_ = create_wall_timer(
@@ -59,7 +59,7 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
       }
     }   
   }
-
+  RCLCPP_INFO(this->get_logger(),"laser 90: %f",msg->ranges[n_positions/2]);
   angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180/M_PI;
 }
 

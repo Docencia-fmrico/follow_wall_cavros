@@ -1,0 +1,6 @@
+[ 36%] Built target gtest
+[ 36%] Built target gtest_main
+[ 63%] Built target follow_wall_cavros
+[35m[1mScanning dependencies of target follow_wall_main[0m
+[ 81%] Built target tests
+[ 90%] [32mBuilding CXX object CMakeFiles/follow_wall_main.dir/src/follow_wall_main.cpp.o[0m

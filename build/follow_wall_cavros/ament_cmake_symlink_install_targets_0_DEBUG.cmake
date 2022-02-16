@@ -1,0 +1,1 @@
+ament_cmake_symlink_install_targets("TARGET_FILES" "/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros/follow_wall_main" "TARGETS" "follow_wall_main" "ARCHIVE_DESTINATION" "lib" "LIBRARY_DESTINATION" "lib" "RUNTIME_DESTINATION" "lib/follow_wall_cavros")

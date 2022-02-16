@@ -21,7 +21,7 @@ LifeCycle::LifeCycle(const std::string & name, const std::chrono::nanoseconds & 
 : LifecycleNode(name)
 {
   // Velocity publisher and laser subscriber
-  pub_ = create_publisher<geometry_msgs::msg::Twist>("key_vel", 10);
+  pub_ = create_publisher<geometry_msgs::msg::Twist>("/commands/velocity", 10);
   sub_ = create_subscription<std_msgs::msg::Float32MultiArray>(
     "laser_info", 10, std::bind(&LifeCycle::distance_callback, this, _1));
 
@@ -133,6 +133,8 @@ void LifeCycle::choose_speeds(void)
   }
   x_ = std::clamp(x_,-0.2f, 0.2f);
   z_ = std::clamp(z_,-0.4f, 0.4f);
+  x_ = 0.0;
+  z_ = 0.4;
 }
 
 void LifeCycle::publish_vel(void)
