@@ -32,20 +32,18 @@ class LaserNode : public rclcpp::Node
 public:
   LaserNode(const std::string & name, const std::chrono::nanoseconds & rate);
   void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
-  void publish_laser_info(void);
+  float get_angle(void);
+  float get_min_distance(void);
+  bool door_open(void);
 
 private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
-  
-  //for testing:
+
+  // for testing:
   float min_;
   float angle_;
   float door_distance_;
-
-  float get_angle(void);
-  float get_min_distance(void);
-  bool door_open(void);
 
   // timers
   rclcpp::TimerBase::SharedPtr timer_;
