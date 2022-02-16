@@ -23,7 +23,6 @@ include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
   src/follow_wall_cavros/LifeCycle.cpp
-  src/follow_wall_cavros/MoveNode.cpp
   src/follow_wall_cavros/LaserNode.cpp
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
