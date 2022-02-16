@@ -18,10 +18,13 @@
 #include "lifecycle_msgs/msg/state.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
-#include "follow_wall_cavros/MoveNode.hpp"
 #include "follow_wall_cavros/LaserNode.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
 #include <memory>
+#include <chrono>
+
+using namespace std::chrono_literals;  // 500ms...
 
 using rcl_interfaces::msg::ParameterType;
 using std::placeholders::_1;
@@ -29,7 +32,7 @@ using std::placeholders::_1;
 class LifeCycle : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  LifeCycle();
+  LifeCycle(const std::string & name, const std::chrono::nanoseconds & rate);
   using CallbackReturnT =
     rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
@@ -38,10 +41,23 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   void do_work();
+  void distance_callback(const std_msgs::msg::Float32MultiArray::SharedPtr msg);
+  void choose_speeds(void);
+  void publish_vel(void);
 
 private:
-  std::shared_ptr<follow_wall_cavros::MoveNode> pub_node_;
-  std::shared_ptr<follow_wall_cavros::LaserNode> sub_node_;
+
+  rclcpp::TimerBase::SharedPtr timer_;
+  rclcpp_lifecycle::LifecyclePublisher<geometry_msgs::msg::Twist>::SharedPtr pub_;
+  rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_;
+
+  //subscription inforamtion
+  float angle_;
+  float right_distance_;
+  float min_distance_;
+
+  float x_;
+  float z_;
 };
 
 #endif  // FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_

@@ -20,8 +20,8 @@
 #include "std_msgs/msg/string.hpp"
 
 #include "follow_wall_cavros/LaserNode.hpp"
-#include "follow_wall_cavros/MoveNode.hpp"
 
+/*
 // Test for velocity check (Motors)
 TEST(test_node, velocity)
 {
@@ -80,9 +80,10 @@ TEST(test_node, velocity)
 }
 
 // Test for distances check (Laser)
+*/
 TEST(test_node, distance)
 {
-  auto node = std::make_shared<follow_wall_cavros::LaserNode>("test_laser_node");
+  auto node = std::make_shared<follow_wall_cavros::LaserNode>("test_laser_node",500ms);
 
   auto test_node = rclcpp::Node::make_shared("test_pub_laser_node");
   auto laser_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>("laser_info", 10);

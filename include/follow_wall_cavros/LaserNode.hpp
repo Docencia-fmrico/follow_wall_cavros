@@ -20,6 +20,7 @@
 #include "std_msgs/msg/float32_multi_array.hpp"
 
 #include <string>
+#include <chrono>
 
 using std::placeholders::_1;
 using namespace std::chrono_literals;  // 500ms...
@@ -29,7 +30,7 @@ namespace follow_wall_cavros
 class LaserNode : public rclcpp::Node
 {
 public:
-  LaserNode(const std::string & name);
+  LaserNode(const std::string & name, const std::chrono::nanoseconds & rate);
   void Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
   float get_angle(void);
   float get_min_distance(void);
@@ -39,10 +40,15 @@ private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
 
+  void publish_laser_info(void);
+
   // for testing:
   float min_;
   float angle_;
   float door_distance_;
+
+  // timers
+  rclcpp::TimerBase::SharedPtr timer_;
 };
 }  // namespace follow_wall_cavros
 

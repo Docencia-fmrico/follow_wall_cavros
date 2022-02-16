@@ -14,16 +14,21 @@
 
 #include "follow_wall_cavros/LaserNode.hpp"
 
+#define DOOR_ANGLE -(M_PI/6)*2
+
 using namespace std::chrono_literals;  // 500ms...
 
 namespace follow_wall_cavros
 {
-LaserNode::LaserNode(const std::string & name)
+LaserNode::LaserNode(const std::string & name, const std::chrono::nanoseconds & rate)
 : Node(name)
 {
   sub_laser_ = create_subscription<sensor_msgs::msg::LaserScan>(
     "scan_raw", 10, std::bind(&LaserNode::Laser_callback, this, _1));
   laser_info_pub_ = create_publisher<std_msgs::msg::Float32MultiArray>("laser_info", 10);
+
+  timer_ = create_wall_timer(
+    rate, std::bind(&LaserNode::publish_laser_info, this));
 }
 
 void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
@@ -32,8 +37,7 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // data in msg->ranges goes from right to left
   // there are 665 values
 
-  std_msgs::msg::Float32MultiArray info;
-  int pos, j = 0;
+  int pos, j = 0, n_positions, door_position;
 
   // angle range follows:
   //            ^ 0º
@@ -41,18 +45,27 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)
   // each angle has 3.055 values
 
-  min_ = 25;
-  door_distance_ = msg->ranges[131];
+  door_position = (DOOR_ANGLE - msg->angle_min) / msg->angle_increment;
+  door_distance_ = msg->ranges[door_position];
 
-  for (int i = 0; i < 666; i++) {
-    // min distance
-    if (msg->ranges[i] < min_) {
-      min_ = msg->ranges[i];
-      pos = i;
-    }
+  n_positions = (msg->angle_max - msg->angle_min) / msg->angle_increment;
+  min_ = 25;
+  for (int i = 0; i < n_positions; i++) {
+    if (!(std::isinf(msg->ranges[i]) || std::isnan(msg->ranges[i]))){
+      // min distance
+      if (msg->ranges[i] < min_) {
+        min_ = msg->ranges[i];
+        pos = i;
+      }
+    }   
   }
 
-  angle_ = ( pos - 329.94 ) / 3.055;
+  angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+}
+
+void LaserNode::publish_laser_info(void)
+{
+  std_msgs::msg::Float32MultiArray info;
 
   info.data.push_back(angle_);  // angle respect to min distance
   info.data.push_back(min_);
