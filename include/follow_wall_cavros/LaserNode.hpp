@@ -40,6 +40,8 @@ private:
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr sub_laser_;
   rclcpp::Publisher<std_msgs::msg::Float32MultiArray>::SharedPtr laser_info_pub_;
 
+  void publish_laser_info(void);
+
   // for testing:
   float min_;
   float angle_;
