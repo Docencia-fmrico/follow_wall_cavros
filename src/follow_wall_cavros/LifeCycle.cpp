@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <string>
+
 #include "follow_wall_cavros/LifeCycle.hpp"
 
 #define ANGULAR_VEL 0.2
@@ -69,7 +71,6 @@ void LifeCycle::do_work(void)
   }
 
   if (pub_->is_activated()) {
-    
     choose_speeds();
     publish_vel();
   }
@@ -81,7 +82,7 @@ void LifeCycle::choose_speeds(void)
   if (min_distance_ > 0.7) {
     RCLCPP_INFO(this->get_logger(), "[%s] APROACHING WALL", get_name());
 
-    //linear
+    // linear
     if (fabs(angle_) < 10) {
       x_ = LINEAR_VEL * 1.5;
     } else if (fabs(angle_) < 20) {
@@ -89,14 +90,14 @@ void LifeCycle::choose_speeds(void)
     } else {
       x_ = LINEAR_VEL / 2;
     }
-    
-    //angular
+
+    // angular
     if (angle_ > 10) {
-      z_ = ANGULAR_VEL; // rotate left to face wall
+      z_ = ANGULAR_VEL;  // rotate left to face wall
     } else if (angle_ < -10) {
-      z_ = -ANGULAR_VEL; // rotate right to face wall
+      z_ = -ANGULAR_VEL;  // rotate right to face wall
     } else {
-      z_ = 0.0; // aproach wall
+      z_ = 0.0;  // aproach wall
     }
 
   } else {  // already close to wall
@@ -106,7 +107,7 @@ void LifeCycle::choose_speeds(void)
     if (angle_ > -105 && angle_ < -75) {  // parallel to wall
       x_ = LINEAR_VEL + 0.1;
     } else if (min_distance_ < 0.3) {  // too close to wall go back
-      x_ = -LINEAR_VEL/4;
+      x_ = -LINEAR_VEL / 4;
     } else {
       x_ = 0.0;
     }
@@ -114,14 +115,13 @@ void LifeCycle::choose_speeds(void)
     // angular
     if (angle_ < -95) {  // turn right
       z_ = -ANGULAR_VEL;
-    } else if(angle_ > -85) {  // turn left
+    } else if (angle_ > -85) {  // turn left
       z_ = ANGULAR_VEL;
     } else {
       z_ = 0.0;
     }
 
     if (right_distance_ > 2.5 && angle_ < 0) {  // detect open door
-      
       if (min_distance_ < 0.5) {
         x_ = 0.42;
         z_ = -0.5;
@@ -131,8 +131,8 @@ void LifeCycle::choose_speeds(void)
       }
     }
   }
-  x_ = std::clamp(x_,-0.2f, 0.2f);
-  z_ = std::clamp(z_,-0.4f, 0.4f);
+  x_ = std::clamp(x_, -0.2f, 0.2f);
+  z_ = std::clamp(z_, -0.4f, 0.4f);
 }
 
 void LifeCycle::publish_vel(void)
@@ -153,4 +153,4 @@ void LifeCycle::distance_callback(const std_msgs::msg::Float32MultiArray::Shared
   angle_ = msg->data[0];
   min_distance_ = msg->data[1];
   right_distance_ = msg->data[2];
-} 
+}

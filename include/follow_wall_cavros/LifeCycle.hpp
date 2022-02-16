@@ -15,16 +15,17 @@
 #ifndef FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
 #define FOLLOW_WALL_CAVROS__LIFECYCLE_HPP_
 
+#include <memory>
+#include <chrono>
+#include <string>
+
 #include "lifecycle_msgs/msg/state.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "follow_wall_cavros/LaserNode.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 
-#include <memory>
-#include <chrono>
-
-using namespace std::chrono_literals;  // 500ms...
+using namespace std::chrono_literals;  // NOLINT
 
 using rcl_interfaces::msg::ParameterType;
 using std::placeholders::_1;
@@ -46,12 +47,11 @@ public:
   void publish_vel(void);
 
 private:
-
   rclcpp::TimerBase::SharedPtr timer_;
   rclcpp_lifecycle::LifecyclePublisher<geometry_msgs::msg::Twist>::SharedPtr pub_;
   rclcpp::Subscription<std_msgs::msg::Float32MultiArray>::SharedPtr sub_;
 
-  //subscription inforamtion
+  // subscription inforamtion
   float angle_;
   float right_distance_;
   float min_distance_;

@@ -15,15 +15,15 @@
 #ifndef FOLLOW_WALL_CAVROS__LASERNODE_HPP_
 #define FOLLOW_WALL_CAVROS__LASERNODE_HPP_
 
+#include <string>
+#include <chrono>
+
 #include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/float32_multi_array.hpp"
 
-#include <string>
-#include <chrono>
-
 using std::placeholders::_1;
-using namespace std::chrono_literals;  // 500ms...
+using namespace std::chrono_literals;  // NOLINT
 
 namespace follow_wall_cavros
 {

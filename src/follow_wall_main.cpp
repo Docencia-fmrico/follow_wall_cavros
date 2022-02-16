@@ -14,13 +14,13 @@
 
 // #include "rclcpp/rclcpp.hpp"
 
+#include <memory>
+
 #include "follow_wall_cavros/LifeCycle.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "follow_wall_cavros/LaserNode.hpp"
-
-#include <memory>
 
 int main(int argc, char * argv[])
 {

@@ -12,9 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <string>
+
 #include "follow_wall_cavros/LaserNode.hpp"
 
-#define DOOR_ANGLE -(M_PI/6)*2
+#define DOOR_ANGLE -(M_PI / 6) * 2
 
 using namespace std::chrono_literals;  // 500ms...
 
@@ -51,16 +53,16 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   n_positions = (msg->angle_max - msg->angle_min) / msg->angle_increment;
   min_ = 25;
   for (int i = 0; i < n_positions; i++) {
-    if (!(std::isinf(msg->ranges[i]) || std::isnan(msg->ranges[i]))){
+    if (!(std::isinf(msg->ranges[i]) || std::isnan(msg->ranges[i]))) {
       // min distance
       if (msg->ranges[i] < min_) {
         min_ = msg->ranges[i];
         pos = i;
       }
-    }   
+    }
   }
 
-  angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+  angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180 / M_PI;
 }
 
 void LaserNode::publish_laser_info(void)
