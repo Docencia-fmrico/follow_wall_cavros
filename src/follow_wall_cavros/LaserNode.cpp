@@ -14,7 +14,12 @@
 
 #include "follow_wall_cavros/LaserNode.hpp"
 
-#define DOOR_ANGLE -(M_PI/6)*2
+#define DOOR_ANGLE -(M_PI/3)*2
+
+#define UP -M_PI
+#define DOWN 0
+#define LEFT M_PI/2
+#define RIGHT -M_PI/2
 
 using namespace std::chrono_literals;  // 500ms...
 
@@ -45,6 +50,24 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
   // 90º <--  robot  --> -90º ( ranges[0] = -108º ; and last ranges[665] = 108º)
   // each angle has 3.055 values
 
+  // -- TRAZAS -- 
+  // int up_idx = (UP - msg->angle_min) / msg->angle_increment;
+  // int down_idx = (DOWN - msg->angle_min) / msg->angle_increment;
+  // int left_idx = (LEFT - msg->angle_min) / msg->angle_increment;
+  // int right_idx = (RIGHT - msg->angle_min) / msg->angle_increment;
+
+  // float up_angle = ((up_idx * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+  // float down_angle = ((down_idx * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+  // float left_angle = ((left_idx * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+  // float right_angle = ((right_idx * msg->angle_increment) + msg->angle_min) * 180/M_PI;
+
+  // RCLCPP_INFO(this->get_logger(), " ---- ");
+  // RCLCPP_INFO(this->get_logger(), "[UP] Angle [%f] Index [%d] Distance [%f]", up_angle, 0, msg->ranges[0]);
+  // RCLCPP_INFO(this->get_logger(), "[DOWN] Angle [%f] Index [%d] Distance [%f]", down_angle, down_idx, msg->ranges[down_idx]);
+  // RCLCPP_INFO(this->get_logger(), "[LEFT] Angle [%f] Index [%d] Distance [%f]", left_angle, left_idx, msg->ranges[left_idx]);
+  // RCLCPP_INFO(this->get_logger(), "[RIGHT] Angle [%f] Index [%d] Distance [%f]", right_angle, right_idx, msg->ranges[right_idx]);
+  // RCLCPP_INFO(this->get_logger(), " ---- ");
+
   door_position = (DOOR_ANGLE - msg->angle_min) / msg->angle_increment;
   door_distance_ = msg->ranges[door_position];
 
@@ -59,7 +82,6 @@ void LaserNode::Laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
       }
     }   
   }
-  RCLCPP_INFO(this->get_logger(),"laser 90: %f",msg->ranges[n_positions/2]);
   angle_ = ((pos * msg->angle_increment) + msg->angle_min) * 180/M_PI;
 }
 
