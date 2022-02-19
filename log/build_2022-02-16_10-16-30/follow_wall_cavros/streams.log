@@ -1,0 +1,40 @@
+[0.017s] Invoking command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --build /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros -- -j12 -l12
+[0.071s] [35m[1mScanning dependencies of target follow_wall_cavros[0m
+[0.081s] [ 36%] Built target gtest
+[0.081s] [ 36%] Built target gtest_main
+[0.109s] [ 54%] [32mBuilding CXX object CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LaserNode.cpp.o[0m
+[0.109s] [ 54%] [32mBuilding CXX object CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LifeCycle.cpp.o[0m
+[5.770s] [ 63%] [32m[1mLinking CXX shared library libfollow_wall_cavros.so[0m
+[6.154s] [ 63%] Built target follow_wall_cavros
+[6.188s] [ 81%] [32m[1mLinking CXX executable tests[0m
+[6.188s] [ 81%] [32m[1mLinking CXX executable follow_wall_main[0m
+[6.376s] [ 90%] Built target follow_wall_main
+[6.491s] [100%] Built target tests
+[6.504s] Invoked command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --build /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros -- -j12 -l12
+[6.558s] Invoking command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --install /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros
+[6.568s] -- Install configuration: "DEBUG"
+[6.568s] -- Execute custom install script
+[6.569s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/include//follow_wall_cavros/LaserNode.hpp
+[6.569s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/include//follow_wall_cavros/LifeCycle.hpp
+[6.570s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/lib/follow_wall_cavros/follow_wall_main
+[6.570s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/library_path.sh
+[6.570s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/library_path.dsv
+[6.570s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/package_run_dependencies/follow_wall_cavros
+[6.571s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/parent_prefix_path/follow_wall_cavros
+[6.571s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/ament_prefix_path.sh
+[6.571s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/ament_prefix_path.dsv
+[6.572s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/path.sh
+[6.572s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/path.dsv
+[6.572s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.bash
+[6.572s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.sh
+[6.572s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.zsh
+[6.573s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.dsv
+[6.573s] -- Symlinking: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/package.dsv
+[6.584s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/packages/follow_wall_cavros
+[6.585s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.585s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_libraries-extras.cmake
+[6.585s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.585s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/follow_wall_cavrosConfig.cmake
+[6.585s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/follow_wall_cavrosConfig-version.cmake
+[6.586s] -- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/package.xml
+[6.588s] Invoked command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --install /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros

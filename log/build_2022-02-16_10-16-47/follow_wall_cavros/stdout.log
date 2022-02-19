@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target follow_wall_cavros[0m
+[ 18%] Built target gtest
+[ 36%] Built target gtest_main
+[ 45%] [32mBuilding CXX object CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LaserNode.cpp.o[0m

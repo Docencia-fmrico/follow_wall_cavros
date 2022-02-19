@@ -1,0 +1,55 @@
+[0.016s] Invoking command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --build /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros -- -j12 -l12
+[0.080s] [ 36%] Built target gtest
+[0.080s] [ 36%] Built target gtest_main
+[0.089s] [ 63%] Built target follow_wall_cavros
+[0.103s] [35m[1mScanning dependencies of target follow_wall_main[0m
+[0.126s] [ 81%] Built target tests
+[0.134s] [ 90%] [32mBuilding CXX object CMakeFiles/follow_wall_main.dir/src/follow_wall_main.cpp.o[0m
+[1.371s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/service.hpp:34[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:25[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[1.371s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[1.371s]                  from [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/include/follow_wall_cavros/LifeCycle.hpp:19[m[K,
+[1.371s]                  from [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:17[m[K:
+[1.371s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:[m[K In function ‘[01m[Kint main(int, char**)[m[K’:
+[1.372s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[1.372s]    33 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(),"fffffff");
+[1.372s]       |               [01;31m[K^~~~[m[K
+[1.372s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[1.372s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.372s]    33 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(),"fffffff");
+[1.372s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[1.372s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.372s]    33 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(),"fffffff");
+[1.372s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[1.372s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:3:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[1.372s]    33 |   [01;31m[KRCLCPP_INFO[m[K(this->get_logger(),"fffffff");
+[1.372s]       |   [01;31m[K^~~~~~~~~~~[m[K
+[1.372s] In file included from [01m[K/opt/ros/foxy/include/rclcpp/client.hpp:40[m[K,
+[1.372s]                  from [01m[K/opt/ros/foxy/include/rclcpp/callback_group.hpp:23[m[K,
+[1.372s]                  from [01m[K/opt/ros/foxy/include/rclcpp/any_executable.hpp:20[m[K,
+[1.372s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategy.hpp:24[m[K,
+[1.372s]                  from [01m[K/opt/ros/foxy/include/rclcpp/memory_strategies.hpp:18[m[K,
+[1.373s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor_options.hpp:20[m[K,
+[1.373s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executor.hpp:33[m[K,
+[1.373s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors/multi_threaded_executor.hpp:26[m[K,
+[1.373s]                  from [01m[K/opt/ros/foxy/include/rclcpp/executors.hpp:21[m[K,
+[1.373s]                  from [01m[K/opt/ros/foxy/include/rclcpp/rclcpp.hpp:146[m[K,
+[1.373s]                  from [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/include/follow_wall_cavros/LifeCycle.hpp:19[m[K,
+[1.373s]                  from [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:17[m[K:
+[1.373s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[1.373s]    33 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(),"fffffff");
+[1.373s]       |               [01;31m[K^~~~[m[K
+[1.373s] [01m[K/home/victor/colcon__ws/src/follow_wall_cavros/src/follow_wall_main.cpp:33:15:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[1.373s]    33 |   RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(),"fffffff");
+[1.373s]       |               [01;31m[K^~~~[m[K
+[1.796s] make[2]: *** [CMakeFiles/follow_wall_main.dir/build.make:63: CMakeFiles/follow_wall_main.dir/src/follow_wall_main.cpp.o] Error 1
+[1.796s] make[1]: *** [CMakeFiles/Makefile2:175: CMakeFiles/follow_wall_main.dir/all] Error 2
+[1.796s] make: *** [Makefile:141: all] Error 2
+[1.799s] Invoked command in '/home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/victor/colcon__ws/install/ros2controlcli:/home/victor/colcon__ws/install/launch_pal:/home/victor/colcon__ws/install/intro_py_ros2:/opt/ros/foxy /usr/bin/cmake --build /home/victor/colcon__ws/src/follow_wall_cavros/build/follow_wall_cavros -- -j12 -l12

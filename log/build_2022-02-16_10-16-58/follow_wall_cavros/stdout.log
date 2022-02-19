@@ -1,0 +1,35 @@
+[35m[1mScanning dependencies of target follow_wall_cavros[0m
+[ 18%] Built target gtest_main
+[ 36%] Built target gtest
+[ 45%] [32mBuilding CXX object CMakeFiles/follow_wall_cavros.dir/src/follow_wall_cavros/LaserNode.cpp.o[0m
+[ 54%] [32m[1mLinking CXX shared library libfollow_wall_cavros.so[0m
+[ 63%] Built target follow_wall_cavros
+[ 72%] [32m[1mLinking CXX executable tests[0m
+[ 81%] [32m[1mLinking CXX executable follow_wall_main[0m
+[ 90%] Built target follow_wall_main
+[100%] Built target tests
+-- Install configuration: "DEBUG"
+-- Execute custom install script
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/include//follow_wall_cavros/LaserNode.hpp
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/include//follow_wall_cavros/LifeCycle.hpp
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/lib/follow_wall_cavros/follow_wall_main
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/library_path.sh
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/library_path.dsv
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/package_run_dependencies/follow_wall_cavros
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/parent_prefix_path/follow_wall_cavros
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/path.sh
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/environment/path.dsv
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.bash
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.sh
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.zsh
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/local_setup.dsv
+-- Symlinking: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/package.dsv
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/ament_index/resource_index/packages/follow_wall_cavros
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_include_directories-extras.cmake
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_libraries-extras.cmake
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/ament_cmake_export_dependencies-extras.cmake
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/follow_wall_cavrosConfig.cmake
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/cmake/follow_wall_cavrosConfig-version.cmake
+-- Up-to-date symlink: /home/victor/colcon__ws/src/follow_wall_cavros/install/follow_wall_cavros/share/follow_wall_cavros/package.xml

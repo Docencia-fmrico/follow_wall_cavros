@@ -1,0 +1,4 @@
+source;share/follow_wall_cavros/local_setup.bash
+source;share/follow_wall_cavros/local_setup.dsv
+source;share/follow_wall_cavros/local_setup.sh
+source;share/follow_wall_cavros/local_setup.zsh

@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// #include "rclcpp/rclcpp.hpp"
 
 #include <memory>
 
@@ -26,22 +25,13 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
-  auto laser_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node", 500ms);
-  auto life_node = std::make_shared<LifeCycle>("LifeCycle", 300ms);
+  auto laser_node = std::make_shared<follow_wall_cavros::LaserNode>("Laser_Node", 1ms);
+  auto life_node = std::make_shared<LifeCycle>("LifeCycle", 1ms);
 
   rclcpp::executors::MultiThreadedExecutor executor;
-
   executor.add_node(laser_node);
   executor.add_node(life_node->get_node_base_interface());
   executor.spin();
-
-  // rclcpp::Rate loop_rate(300ms);
-
-  // while (rclcpp::ok()) {
-  //   life_node->do_work();
-  //   rclcpp::spin_some(life_node->get_node_base_interface());
-  //   loop_rate.sleep();
-  // }
 
   rclcpp::shutdown();
 
