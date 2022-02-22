@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <string>
+
 #include "follow_wall_cavros/LifeCycle.hpp"
 
 #define ANGULAR_VEL 0.4
@@ -69,7 +71,6 @@ void LifeCycle::do_work(void)
   }
 
   if (pub_->is_activated()) {
-    
     choose_speeds();
     publish_vel();
   }
@@ -167,7 +168,7 @@ void LifeCycle::choose_speeds(void)
     // 90º wall config
     if ((angle360 > 90) && (angle360 <= 270)) {
       z_ = -ANGULAR_VEL;
-    } else if ((angle360 > 270) || (angle360 <= 90)){
+    } else if ( (angle360 > 270) || (angle360 <= 90) ){
       z_ = ANGULAR_VEL;
     } else {
       z_ = 0.0;
@@ -191,9 +192,8 @@ void LifeCycle::choose_speeds(void)
       }
     }
   }
-
-  x_ = std::clamp(x_,-0.2f, 0.2f);
-  z_ = std::clamp(z_,-0.4f, 0.4f);
+  x_ = std::clamp(x_, -0.2f, 0.2f);
+  z_ = std::clamp(z_, -0.4f, 0.4f);
 }
 
 void LifeCycle::publish_vel(void)
@@ -214,4 +214,4 @@ void LifeCycle::distance_callback(const std_msgs::msg::Float32MultiArray::Shared
   angle_ = msg->data[0];
   min_distance_ = msg->data[1];
   right_distance_ = msg->data[2];
-} 
+}

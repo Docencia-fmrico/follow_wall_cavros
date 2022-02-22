@@ -33,12 +33,17 @@ In this node the robot's behavior is separated into two states : aproaching the 
 ## Conclusions
 In conclusion, Tiago and Kobuki are able to follow a wall using simple reactive behaviour using simple sensors and actuators.
 
-## Video
-Tiago's simulation video:
 
-[Video_follow_wall](https://urjc-my.sharepoint.com/:v:/g/personal/v_delatorre_2019_alumnos_urjc_es/EfGfeaxClGBBiwwTuLXH_w0BTLgBT-TUQoRV9uln_RQ5NA?e=EVxZuO)
+## Video
+Video of Tiago working in Gazebo:
+
+[Video_gazebo_follow_wall](https://urjc-my.sharepoint.com/:v:/g/personal/v_delatorre_2019_alumnos_urjc_es/EfGfeaxClGBBiwwTuLXH_w0BTLgBT-TUQoRV9uln_RQ5NA?e=EVxZuO)
 
 Kobuki's real robot test:
+
+[Video_follow_corners](https://urjc-my.sharepoint.com/:v:/g/personal/r_montillaf_2019_alumnos_urjc_es/EYs1AoZE1-xKqDASg9e0-84BJwlyLanlmBEnYzI_P4EwcA?e=doxDcn)
+
+[Video_follow_turns](https://urjc-my.sharepoint.com/:v:/g/personal/r_montillaf_2019_alumnos_urjc_es/EXmkvGisdyxDqYQs6fM6loQB1oCNjSdUZrWV8r9qWzjlAQ?e=zkUxEo)
 
 
 
