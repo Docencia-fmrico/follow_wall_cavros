@@ -26,9 +26,13 @@ In conclusion, Tiago is able to follow a wall using simple sensor/actuators.
 
 For extensibility reasons, we capsuled everything in a lifecycle node, where we can switch between 3 states, unconfigure, inactive and active. This last one is where the job is done.
 
-## Video
+## Videos
 
-[Video_follow_wall](https://urjc-my.sharepoint.com/:v:/g/personal/v_delatorre_2019_alumnos_urjc_es/EfGfeaxClGBBiwwTuLXH_w0BTLgBT-TUQoRV9uln_RQ5NA?e=EVxZuO)
+Video of the robot working in Gazebo:
+[Video_gazebo_follow_wall](https://urjc-my.sharepoint.com/:v:/g/personal/v_delatorre_2019_alumnos_urjc_es/EfGfeaxClGBBiwwTuLXH_w0BTLgBT-TUQoRV9uln_RQ5NA?e=EVxZuO)
+Videos of the real robot running:
+[Video_follow_corners](https://urjc-my.sharepoint.com/:v:/g/personal/r_montillaf_2019_alumnos_urjc_es/EYs1AoZE1-xKqDASg9e0-84BJwlyLanlmBEnYzI_P4EwcA?e=doxDcn)
+[Video_follow_turns](https://urjc-my.sharepoint.com/:v:/g/personal/r_montillaf_2019_alumnos_urjc_es/EXmkvGisdyxDqYQs6fM6loQB1oCNjSdUZrWV8r9qWzjlAQ?e=zkUxEo)
 
 
 
